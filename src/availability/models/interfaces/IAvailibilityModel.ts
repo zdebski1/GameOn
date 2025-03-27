@@ -1,3 +1,0 @@
-interface IAvailibilityModel {
-    availableDateTime: Date
-}

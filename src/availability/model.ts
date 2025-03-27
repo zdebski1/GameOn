@@ -47,7 +47,8 @@ Availability.init(
   {
     sequelize: sequelizeDb,
     tableName: 'availability',
-    timestamps: false, // Managing timestamps manually
+    timestamps: false,
   }
 );
+
 export default Availability;

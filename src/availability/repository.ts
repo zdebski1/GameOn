@@ -13,4 +13,4 @@ async function getAllAvailabilities() {
     }
 }
 
-getAllAvailabilities();
+export default getAllAvailabilities;

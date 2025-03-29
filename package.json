@@ -15,9 +15,12 @@
     "typescript": "^5.8.2"
   },
   "scripts": {
-    "start": "ts-node src/availability/model.ts",
-    "service": "ts-node src/availability/service.ts",
+    "app": "ts-node src/server/app.ts",
+    "server": "ts-node src/server/server.ts",    
+    "availabilityModel": "ts-node src/availability/model.ts",
+    "availabilityService": "ts-node src/availability/service.ts",
     "availbilitiesRepository": "ts-node src/availability/repository.ts",
+    "availbilitiesRoute": "ts-node src/availability/route.ts",
     "teamRepository": "ts-node src/team/repository.ts"
   }
 }

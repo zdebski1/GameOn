@@ -6,7 +6,6 @@ async function getAllAvailabilities() {
 
         const plainAvailabilities = availabilities.map(availability => availability.get({ plain: true }));
 
-        console.log(plainAvailabilities);
         return plainAvailabilities;
     }catch(error) {
         console.error('Error fetching availabilities:', error);

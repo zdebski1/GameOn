@@ -14,6 +14,7 @@
   },
   "scripts": {
     "start": "ts-node src/availability/model.ts",
-    "service": "ts-node src/availability/service.ts"
+    "service": "ts-node src/availability/service.ts",
+    "repository": "ts-node src/availability/repository.ts"
   }
 }

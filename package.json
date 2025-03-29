@@ -15,6 +15,7 @@
   "scripts": {
     "start": "ts-node src/availability/model.ts",
     "service": "ts-node src/availability/service.ts",
-    "repository": "ts-node src/availability/repository.ts"
+    "availbilitiesRepository": "ts-node src/availability/repository.ts",
+    "teamRepository": "ts-node src/team/repository.ts"
   }
 }

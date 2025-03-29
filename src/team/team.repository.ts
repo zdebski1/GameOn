@@ -1,4 +1,4 @@
- import Team from "./model";
+ import Team from "./team.model";
 
 async function getAllTeams() {
     try {

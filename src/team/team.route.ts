@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import getAllTeams from '../team/repository';
+import getAllTeams from './team.repository';
 
 export default async function (fastify: FastifyInstance) {
     fastify.get('/teams', async (request, reply) => {

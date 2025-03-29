@@ -1,11 +1,11 @@
-import ITeamModel from './interface';
+import ITeamModel from './team.interface';
 import sequelizeDb from '../config/sequelizeDb';  
 import { DataTypes, Model } from 'sequelize';
 
 class Team extends Model<ITeamModel> implements ITeamModel {
   public teamId!: Number;
-  public teamName!: String;
-  public teamMember!: String;
+  public teamNameFk!: Number;
+  public teamMemberFk!: Number;
   public createdDateTime!: Date;
   public createdBy!: String;
   public updatedDateTime!: Date;
@@ -19,12 +19,12 @@ Team.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    teamName: {
-      type: DataTypes.STRING,
+    teamNameFk: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    teamMember: {
-      type: DataTypes.STRING,
+    teamMemberFk: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     createdDateTime: {

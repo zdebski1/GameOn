@@ -1,6 +1,6 @@
 import Fastify from 'fastify';
 import availabilityRoutes from '../availability/route';
-import teamRoutes from '../team/route';
+import teamRoutes from '../team/team.route';
 
 const fastify = Fastify({ logger: true });
 

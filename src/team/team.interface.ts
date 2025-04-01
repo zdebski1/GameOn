@@ -1,7 +1,7 @@
 interface ITeamModel {
     teamId: Number,
-    teamNameFk: Number,
-    teamMemberFk: Number,
+    teamName: String,
+    isActive: Boolean,
     createdDateTime: Date,
     createdBy: String,
     updatedDateTime: Date,

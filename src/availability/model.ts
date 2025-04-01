@@ -3,8 +3,9 @@ import sequelizeDb from '../config/sequelizeDb';
 import { DataTypes, Model } from 'sequelize';
 
 class Availability extends Model<IAvailabilityModel> implements IAvailabilityModel {
-  public id!: Number;
+  public availabilityId!: Number;
   public gameNameFk!: Number;
+  public teamFk!: Number;
   public availableDateTime!: Date;
   public createdDateTime!: Date;
   public createdBy!: String;
@@ -14,7 +15,7 @@ class Availability extends Model<IAvailabilityModel> implements IAvailabilityMod
 
 Availability.init(
   {
-    id: {
+    availabilityId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -23,6 +24,10 @@ Availability.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    teamFk: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },    
     availableDateTime: {
       type: DataTypes.DATE,
       allowNull: false,

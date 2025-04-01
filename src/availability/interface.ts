@@ -1,6 +1,7 @@
 interface IAvailabilityModel {
-    id: Number,
+    availabilityId: Number,
     gameNameFk: Number,
+    teamFk: Number,
     availableDateTime: Date,
     createdDateTime: Date,
     createdBy: String,

@@ -4,7 +4,7 @@ import { DataTypes, Model } from 'sequelize';
 
 class TeamMember extends Model<ITeamMemberModel> implements ITeamMemberModel {
     public teamMemberId!: Number;
-    public teamMember!: String;
+    public userFk!: Number;
     public isActive!: Boolean;
     public teamFk!: Number;
     public createdDateTime!: Date;
@@ -20,8 +20,8 @@ TeamMember.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    teamMember: {
-      type: DataTypes.STRING,
+    userFk: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     isActive: {

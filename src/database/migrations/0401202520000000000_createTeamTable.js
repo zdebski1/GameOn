@@ -5,7 +5,7 @@ exports.up = function(knex) {
       table.boolean('isActive');           
       table.timestamp('createdDateTime').defaultTo(knex.fn.now());
       table.string('createdBy');
-      table.timestamp('updatedDateTime').defaultTo(knex.fn.now());
+      table.timestamp('updatedDateTime');
       table.string('updatedBy');
     });
   };

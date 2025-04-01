@@ -1,6 +1,6 @@
 interface ITeamMemberModel {
     teamMemberId: Number,
-    teamMember: String,
+    userFk: Number,
     isActive: Boolean,
     teamFk: Number,
     createdDateTime: Date,

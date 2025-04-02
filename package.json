@@ -1,12 +1,15 @@
 {
   "dependencies": {
     "dotenv": "^16.4.7",
+    "expo": "^52.0.42",
     "fastify": "^5.2.2",
     "fastify-plugin": "^5.0.1",
     "knex": "^3.1.0",
     "node-fetch": "^3.3.2",
     "pg": "^8.14.1",
     "pg-hstore": "^2.3.4",
+    "react-dom": "^19.1.0",
+    "react-native": "^0.78.2",
     "sequelize": "^6.37.6"
   },
   "devDependencies": {
@@ -16,11 +19,14 @@
   },
   "scripts": {
     "app": "ts-node src/server/app.ts",
-    "server": "ts-node src/server/server.ts",    
+    "server": "ts-node src/server/server.ts",
     "availabilityModel": "ts-node src/availability/model.ts",
     "availabilityService": "ts-node src/availability/service.ts",
     "availbilitiesRepository": "ts-node src/availability/repository.ts",
     "availbilitiesRoute": "ts-node src/availability/route.ts",
-    "teamRepository": "ts-node src/team/repository.ts"
+    "teamRepository": "ts-node src/team/repository.ts",
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios" 
   }
 }

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@react-native-picker/picker": "^2.11.0",
     "dotenv": "^16.4.7",
     "expo": "^52.0.42",
     "fastify": "^5.2.2",
@@ -15,11 +16,13 @@
   },
   "devDependencies": {
     "@types/node": "^22.13.13",
+    "concurrently": "^9.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
   },
   "scripts": {
-    "start": "expo start",
+    "start": "concurrently \"npm run server\" \"npx expo start\"",
+    "server": "ts-node ../src/server/server.ts",
     "android": "expo run:android",
     "ios": "expo run:ios"
   },

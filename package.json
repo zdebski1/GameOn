@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@fastify/cors": "^11.0.1",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.2",
     "fastify-plugin": "^5.0.1",
@@ -16,7 +17,7 @@
   },
   "scripts": {
     "app": "ts-node src/server/app.ts",
-    "server": "ts-node src/server/server.ts",    
+    "server": "ts-node src/server/server.ts",
     "availabilityModel": "ts-node src/availability/model.ts",
     "availabilityService": "ts-node src/availability/service.ts",
     "availbilitiesRepository": "ts-node src/availability/repository.ts",

@@ -8,7 +8,6 @@ export async function getAllTeamMembers() {
           model: User,
           as: 'user',
           attributes: [
-            'userName',
             'firstName',
             'lastName'
           ],
@@ -38,7 +37,6 @@ export async function getTeamMembersByTeamId(teamId: string) {
           model: User,
           as: 'user',
           attributes: [
-            'userName',
             'firstName',
             'lastName',
           ],

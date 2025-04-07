@@ -1,4 +1,4 @@
-import { CreateUserDTO } from './CreateUserDto';
+import { CreateUserDTO } from './user.dto';
 import User from './user.model';
 import bcrypt from 'bcrypt';
 import { Op } from 'sequelize';

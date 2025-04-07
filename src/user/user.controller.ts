@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import { CreateUserDTO } from './CreateUserDto';
+import { CreateUserDTO } from './user.dto';
 import { createUserService } from './user.service';
 
 export async function createUserHandler(

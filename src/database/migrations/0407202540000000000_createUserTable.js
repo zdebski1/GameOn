@@ -4,7 +4,10 @@ exports.up = function(knex) {
       table.string('userName');
       table.string('password');
       table.string('email');
-      table.timestamp('createdDateTime').defaultTo(knex.fn.now());
+      table.string('firstName');
+      table.string('lastName');
+      table.boolean('isActive');
+      table.timestamp('dateRegistered').defaultTo(knex.fn.now());
       table.string('createdBy');
       table.timestamp('updatedDateTime');
       table.string('updatedBy');

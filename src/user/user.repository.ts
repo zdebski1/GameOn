@@ -1,4 +1,4 @@
-import User from "./model";
+import User from "./user.model";
 
 async function getAllUsers() {
     try {

@@ -1,4 +1,4 @@
-import IUserModel from './interface';
+import IUserModel from './user.interface';
 import sequelizeDb from '../config/sequelizeDb';  
 import { DataTypes, Model } from 'sequelize';
 

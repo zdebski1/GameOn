@@ -1,16 +1,15 @@
-interface IUserModel {
-    userId: Number,
-    userName: String,
-    password: String,
-    firstName: String,
-    lastName: String,
-    birthdate: Date,
-    steamAccountId: String,
-    isActive: Boolean,
-    createdDateTime: Date,
-    createdBy: String,
-    updatedDateTime: Date,
-    updatedBy: String
-}
-
-export default IUserModel;
+export interface IUserModel {
+    userId?: number;
+    userName: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    birthdate: Date;
+    steamAccountId?: string | null;
+    isActive: boolean;
+    createdDateTime: Date;
+    createdBy: string;
+    updatedDateTime?: Date | null ;
+    updatedBy?: string | null ;
+  }
+  

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@fastify/cors": "^11.0.1",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.2",
     "fastify-plugin": "^5.0.1",
@@ -11,6 +12,7 @@
     "sequelize": "^6.37.6"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^22.13.13",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"

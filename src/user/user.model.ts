@@ -1,21 +1,21 @@
-import IUserModel from './user.interface';
+import { IUserModel } from './user.interface';
 import sequelizeDb from '../config/sequelizeDb';  
 import { DataTypes, Model } from 'sequelize';
 import TeamMember from '../team/teamMember.model';
 
 class User extends Model<IUserModel> implements IUserModel {
-    public userId!: Number;
-    public userName!: String;
-    public password!: String;
-    public firstName!: String;
-    public lastName!: String;
+    public userId!: number;
+    public userName!: string;
+    public password!: string;
+    public firstName!: string;
+    public lastName!: string;
     public birthdate!: Date;
-    public steamAccountId!: String;
-    public isActive!: Boolean;
+    public steamAccountId!: string;
+    public isActive!: boolean;
     public createdDateTime!: Date;
-    public createdBy!: String;
+    public createdBy!: string;
     public updatedDateTime!: Date;
-    public updatedBy!: String;
+    public updatedBy!: string;
 
     static associate(models: { TeamMember: typeof TeamMember }) {
       User.hasMany(models.TeamMember, {
@@ -50,11 +50,11 @@ User.init(
       },
       birthdate: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
       },
       steamAccountId: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       isActive: {
         type: DataTypes.BOOLEAN,
@@ -70,11 +70,11 @@ User.init(
     },
     updatedDateTime: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
+      allowNull: true,
     },
     updatedBy: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {

@@ -1,12 +1,12 @@
 interface ITeamMemberModel {
-    teamMemberId: Number,
-    userFk: Number,
-    isActive: Boolean,
-    teamFk: Number,
+    teamMemberId: number,
+    userFk: number,
+    isActive: boolean,
+    teamFk: number,
     createdDateTime: Date,
-    createdBy: String,
+    createdBy: string,
     updatedDateTime: Date,
-    updatedBy: String
+    updatedBy: string
 }
 
 export default ITeamMemberModel;

@@ -4,14 +4,14 @@ import { DataTypes, Model } from 'sequelize';
 import User from '../user/user.model';
 
 class TeamMember extends Model<ITeamMemberModel> implements ITeamMemberModel {
-    public teamMemberId!: Number;
-    public userFk!: Number;
-    public isActive!: Boolean;
-    public teamFk!: Number;
+    public teamMemberId!: number;
+    public userFk!: number;
+    public isActive!: boolean;
+    public teamFk!: number;
     public createdDateTime!: Date;
-    public createdBy!: String;
+    public createdBy!: string;
     public updatedDateTime!: Date;
-    public updatedBy! : String;
+    public updatedBy! : string;
 
     static associate(models: { User: typeof User }) {
       TeamMember.belongsTo(models.User, {

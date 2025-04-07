@@ -8,7 +8,7 @@ export default async function (fastify: FastifyInstance) {
             reply.send(teamMembers);
         } catch (error) {
             fastify.log.error(error);
-            reply.status(500).send({ error});
+            reply.status(500).send({ error: `Failed to fetch team members`  });
         }
     });
 

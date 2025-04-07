@@ -1,6 +1,7 @@
 import { User, TeamMember } from "../models";
+import { TeamMemberWithUserDto } from "./teamMember.dto";
 
-export async function getTeamMembersByTeamId(teamId: string) {
+export async function getTeamMembersByTeamId(teamId: string): Promise<TeamMemberWithUserDto[]> {
   try {
     const teamMembers = await TeamMember.findAll({
       where: {
@@ -10,21 +11,18 @@ export async function getTeamMembersByTeamId(teamId: string) {
         {
           model: User,
           as: 'user',
-          attributes: [
-            'firstName',
-            'lastName',
-          ],
+          attributes: ['firstName', 'lastName', 'isActive'],
         },
       ],
-      attributes: [
-        'teamMemberId',
-        'isActive',
-        'teamFk',
-      ],
+      attributes: ['teamMemberId', 'isActive', 'teamFk'],
     });
 
-    return teamMembers.map(teamMember => teamMember.get({ plain: true }));
+    return teamMembers.map(tm => {
+      const plain = tm.get({ plain: true }) as any;
+      return plain as TeamMemberWithUserDto;
+    });
   } catch (error) {
     console.error('Error fetching Team Members:', error);
+    return [];
   }
 }

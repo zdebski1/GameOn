@@ -3,13 +3,13 @@ import sequelizeDb from '../config/sequelizeDb';
 import { DataTypes, Model } from 'sequelize';
 
 class Team extends Model<ITeamModel> implements ITeamModel {
-  public teamId!: Number;
-  public teamName!: String;
-  public isActive!: Boolean;
+  public teamId!: number;
+  public teamName!: string;
+  public isActive!: boolean;
   public createdDateTime!: Date;
-  public createdBy!: String;
+  public createdBy!: string;
   public updatedDateTime!: Date;
-  public updatedBy!: String
+  public updatedBy!: string
 }
 
 Team.init(
@@ -37,11 +37,11 @@ Team.init(
     },
     updatedDateTime: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
+      allowNull: true,
     },
     updatedBy: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {

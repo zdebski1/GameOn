@@ -1,11 +1,11 @@
 interface ITeamModel {
-    teamId: Number,
-    teamName: String,
-    isActive: Boolean,
-    createdDateTime: Date,
-    createdBy: String,
-    updatedDateTime: Date,
-    updatedBy: String
+    teamId?: number;
+    teamName: string;
+    isActive: boolean;
+    createdDateTime: Date;
+    createdBy: string;
+    updatedDateTime?: Date | null;
+    updatedBy?: string | null;
 }
 
 export default ITeamModel;

@@ -7,12 +7,11 @@ class User extends Model<IUserModel> implements IUserModel {
     public userId!: number;
     public userName!: string;
     public password!: string;
+    public email!: string;
     public firstName!: string;
     public lastName!: string;
-    public birthdate!: Date;
-    public steamAccountId!: string;
     public isActive!: boolean;
-    public createdDateTime!: Date;
+    public dateRegistered!: Date;
     public createdBy!: string;
     public updatedDateTime!: Date;
     public updatedBy!: string;
@@ -40,27 +39,23 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     lastName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      birthdate: {
-        type: DataTypes.DATE,
-        allowNull: true,
-      },
-      steamAccountId: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      isActive: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-      },                      
-    createdDateTime: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },            
+    dateRegistered: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },

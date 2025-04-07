@@ -2,14 +2,12 @@ export interface IUserModel {
     userId?: number;
     userName: string;
     password: string;
+    email: string;
     firstName: string;
     lastName: string;
-    birthdate: Date;
-    steamAccountId?: string | null;
     isActive: boolean;
-    createdDateTime: Date;
+    dateRegistered: Date;
     createdBy: string;
     updatedDateTime?: Date | null ;
     updatedBy?: string | null ;
   }
-  

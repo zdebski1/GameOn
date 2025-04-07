@@ -1,15 +1,58 @@
-import TeamMember from "./teamMember.model";
+import { User, TeamMember } from "../models";
 
-async function getAllTeamMembers() {
-    try {
-        const teams = await TeamMember.findAll();
+export async function getAllTeamMembers() {
+  try {
+    const teamMembers = await TeamMember.findAll({
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: [
+            'userName',
+            'firstName',
+            'lastName'
+          ],
+        },
+      ],
+      attributes: [
+        'teamMemberId',
+        'isActive',
+        'teamFk',
+      ],
+    });
 
-        const plainTeams = teams.map(teamMember => teamMember.get({ plain: true }));
-
-        return plainTeams;
-    }catch(error) {
-        console.error('Error fetching Team Members:', error);
-    }
+    return teamMembers.map(teamMember => teamMember.get({ plain: true }));
+  } catch (error) {
+    console.error('Error fetching Team Members:', error);
+  }
 }
 
-export default getAllTeamMembers;
+export async function getTeamMembersByTeamId(teamId: string) {
+  try {
+    const teamMembers = await TeamMember.findAll({
+      where: {
+        teamFk: teamId,
+      },
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: [
+            'userName',
+            'firstName',
+            'lastName',
+          ],
+        },
+      ],
+      attributes: [
+        'teamMemberId',
+        'isActive',
+        'teamFk',
+      ],
+    });
+
+    return teamMembers.map(teamMember => teamMember.get({ plain: true }));
+  } catch (error) {
+    console.error('Error fetching Team Members:', error);
+  }
+}

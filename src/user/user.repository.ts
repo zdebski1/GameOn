@@ -1,15 +1,11 @@
 import User from "./user.model";
 
-async function getAllUsers() {
+export async function getAllUsers() {
     try {
         const users = await User.findAll();
 
-        const plainusers = users.map(user => user.get({ plain: true }));
-
-        return plainusers;
+        return users.map(user => user.get({ plain: true }));
     }catch(error) {
         console.error('Error fetching users:', error);
     }
 }
-
-export default getAllUsers;

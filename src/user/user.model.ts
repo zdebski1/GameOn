@@ -1,6 +1,7 @@
 import IUserModel from './user.interface';
 import sequelizeDb from '../config/sequelizeDb';  
 import { DataTypes, Model } from 'sequelize';
+import TeamMember from '../team/teamMember.model';
 
 class User extends Model<IUserModel> implements IUserModel {
     public userId!: Number;
@@ -15,7 +16,14 @@ class User extends Model<IUserModel> implements IUserModel {
     public createdBy!: String;
     public updatedDateTime!: Date;
     public updatedBy!: String;
-}
+
+    static associate(models: { TeamMember: typeof TeamMember }) {
+      User.hasMany(models.TeamMember, {
+        foreignKey: 'userFk',
+        as: 'teamMembers',
+      });
+    }
+  }
 
 User.init(
   {
@@ -71,7 +79,7 @@ User.init(
   },
   {
     sequelize: sequelizeDb,
-    tableName: 'User',
+    tableName: 'user',
     timestamps: false,
   }
 );

@@ -1,6 +1,7 @@
 import ITeamMemberModel from './teamMember.interface';
 import sequelizeDb from '../config/sequelizeDb';  
 import { DataTypes, Model } from 'sequelize';
+import User from '../user/user.model';
 
 class TeamMember extends Model<ITeamMemberModel> implements ITeamMemberModel {
     public teamMemberId!: Number;
@@ -11,7 +12,14 @@ class TeamMember extends Model<ITeamMemberModel> implements ITeamMemberModel {
     public createdBy!: String;
     public updatedDateTime!: Date;
     public updatedBy! : String;
-}
+
+    static associate(models: { User: typeof User }) {
+      TeamMember.belongsTo(models.User, {
+        foreignKey: 'userFk',
+        as: 'user',
+      });
+    }
+  }
 
 TeamMember.init(
   {

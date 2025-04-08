@@ -1,5 +1,6 @@
 import { User, TeamMember } from "../models";
 import { TeamMemberWithUserDto } from "./teamMember.dto";
+import ITeamMemberModel from "./teamMember.interface";
 
 export async function getTeamMembersByTeamId(teamId: string): Promise<TeamMemberWithUserDto[]> {
   try {
@@ -11,7 +12,7 @@ export async function getTeamMembersByTeamId(teamId: string): Promise<TeamMember
         {
           model: User,
           as: 'user',
-          attributes: ['firstName', 'lastName', 'isActive'],
+          attributes: ['firstName', 'lastName'],
         },
       ],
       attributes: ['teamMemberId', 'isActive', 'teamFk'],
@@ -25,4 +26,8 @@ export async function getTeamMembersByTeamId(teamId: string): Promise<TeamMember
     console.error('Error fetching Team Members:', error);
     return [];
   }
+}
+
+export async function createTeamMember(data: Omit<ITeamMemberModel, 'teamMemberId'>) {
+  return TeamMember.create(data);
 }

@@ -1,6 +1,5 @@
 import { TeamDto } from './team.dto';
-import Team from './team.model';
-import getAllTeams from './team.repository';
+import { getAllTeams, createTeam } from './team.repository';
 
 export async function createTeamService (teamDto: TeamDto) {
   try {
@@ -11,7 +10,7 @@ export async function createTeamService (teamDto: TeamDto) {
     } = teamDto;
 
 
-    const newTeam = await Team.create({
+    const newTeam = await createTeam({
         teamName,
         isActive: true,
         isOwner,

@@ -1,8 +1,7 @@
 import { CreateUserDTO } from './user.dto';
-import User from './user.model';
 import bcrypt from 'bcrypt';
-import { Op } from 'sequelize';
 import { HttpError } from '../utils/httpError';
+import { findUserByEmail, createUser } from './user.repository';
 
 export async function createUserService(createUserDto: CreateUserDTO) {
   try {
@@ -16,11 +15,7 @@ export async function createUserService(createUserDto: CreateUserDTO) {
       createdBy
     } = createUserDto;
 
-    const existingUser = await User.findOne({
-      where: {
-        [Op.or]: [{ email }],
-      },
-    });
+    const existingUser = await findUserByEmail(email);
 
     if (existingUser) {
       throw new HttpError('Email already exists', 409);
@@ -28,7 +23,7 @@ export async function createUserService(createUserDto: CreateUserDTO) {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = await User.create({
+    const newUser = await createUser({
       userName,
       password: hashedPassword,
       email,
@@ -50,7 +45,6 @@ export async function createUserService(createUserDto: CreateUserDTO) {
         email: newUser.email,
       },
     };
-
   } catch (error) {
     console.error('Error creating user:', (error as Error).message);
     throw error;

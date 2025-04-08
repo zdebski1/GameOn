@@ -1,5 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import { teamMembersByTeamId } from "./teamMember.service";
+import { createTeamMemberService, teamMembersByTeamId } from "./teamMember.service";
+import { TeamMemberDto } from './teamMember.dto';
 
 export async function getAllTeamMembersHandler(
     request: FastifyRequest<{ Params: { teamId: string } }>,
@@ -13,6 +14,30 @@ export async function getAllTeamMembersHandler(
       return reply.code(200).send(teamMembers);
     } catch (error) {
       console.error('Error getting team members:', error);
+      return reply.code(500).send({ message: 'Internal Server Error' });
+    }
+  }
+
+
+export async function createTeamMemberHandler (
+    request: FastifyRequest<{ 
+      Params: { teamId: string }, 
+      Body: Omit<TeamMemberDto, 'teamFk'> 
+    }>,
+    reply: FastifyReply
+  ) {
+    try {
+      const { teamId } = request.params;
+      const teamMemberDto = {
+        ...request.body,
+        teamFk: Number(teamId),
+      };
+  
+      const newTeamMember = await createTeamMemberService(teamMemberDto);
+      return reply.code(201).send(newTeamMember);
+  
+    } catch (error) {
+      console.error('Error creating team member: ', error);  
       return reply.code(500).send({ message: 'Internal Server Error' });
     }
   }

@@ -1,6 +1,7 @@
- import Team from "./team.model";
+import ITeamModel from "./team.interface";
+import Team from "./team.model";
 
-async function getAllTeams() {
+export async function getAllTeams() {
     try {
         const teams = await Team.findAll();
 
@@ -11,4 +12,6 @@ async function getAllTeams() {
     }
 }
 
-export default getAllTeams;
+export async function createTeam(data: Omit<ITeamModel, 'teamId'>) {
+    return Team.create(data);
+  }

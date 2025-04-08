@@ -1,3 +1,5 @@
+import { BlobOptions } from "buffer";
+
 export interface IUserModel {
     userId?: number;
     userName: string;
@@ -6,8 +8,9 @@ export interface IUserModel {
     firstName: string;
     lastName: string;
     isActive: boolean;
+    isAdmin: boolean;
     dateRegistered: Date;
-    createdBy: string;
+    createdBy: number;
     updatedDateTime?: Date | null ;
-    updatedBy?: string | null ;
+    updatedBy?: number | null ;
   }

@@ -9,9 +9,9 @@ class TeamMember extends Model<ITeamMemberModel> implements ITeamMemberModel {
     public isActive!: boolean;
     public teamFk!: number;
     public createdDateTime!: Date;
-    public createdBy!: string;
+    public createdBy!: number;
     public updatedDateTime!: Date;
-    public updatedBy! : string;
+    public updatedBy! : number;
 
     static associate(models: { User: typeof User }) {
       TeamMember.belongsTo(models.User, {
@@ -45,16 +45,16 @@ TeamMember.init(
       defaultValue: DataTypes.NOW,
     },
     createdBy: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     updatedDateTime: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
+      allowNull: true,      
     },
     updatedBy: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
   },
   {

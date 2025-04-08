@@ -11,10 +11,11 @@ class User extends Model<IUserModel> implements IUserModel {
     public firstName!: string;
     public lastName!: string;
     public isActive!: boolean;
+    public isAdmin!: boolean;
     public dateRegistered!: Date;
-    public createdBy!: string;
+    public createdBy!: number;
     public updatedDateTime!: Date;
-    public updatedBy!: string;
+    public updatedBy!: number;
 
     static associate(models: { TeamMember: typeof TeamMember }) {
       User.hasMany(models.TeamMember, {
@@ -54,13 +55,17 @@ User.init(
     isActive: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-    },            
+    },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },                 
     dateRegistered: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
     createdBy: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     updatedDateTime: {
@@ -68,7 +73,7 @@ User.init(
       allowNull: true,
     },
     updatedBy: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
   },

@@ -4,9 +4,9 @@ interface ITeamMemberModel {
     isActive: boolean,
     teamFk: number,
     createdDateTime: Date,
-    createdBy: string,
+    createdBy: number,
     updatedDateTime: Date,
-    updatedBy: string
+    updatedBy: number
 }
 
 export default ITeamMemberModel;

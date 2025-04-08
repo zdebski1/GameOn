@@ -1,12 +1,12 @@
 interface IAvailabilityModel {
-    availabilityId: Number,
-    gameNameFk: Number,
-    teamFk: Number,
+    availabilityId: number,
+    gameNameFk: number,
+    teamFk: number,
     availableDateTime: Date,
     createdDateTime: Date,
-    createdBy: String,
+    createdBy: number,
     updatedDateTime: Date,
-    updatedBy: String
+    updatedBy: number
 }
 
 export default IAvailabilityModel;

@@ -3,14 +3,14 @@ import sequelizeDb from '../config/sequelizeDb';
 import { DataTypes, Model } from 'sequelize';
 
 class Availability extends Model<IAvailabilityModel> implements IAvailabilityModel {
-  public availabilityId!: Number;
-  public gameNameFk!: Number;
-  public teamFk!: Number;
+  public availabilityId!: number;
+  public gameNameFk!: number;
+  public teamFk!: number;
   public availableDateTime!: Date;
   public createdDateTime!: Date;
-  public createdBy!: String;
+  public createdBy!: number;
   public updatedDateTime!: Date;
-  public updatedBy!: String
+  public updatedBy!: number
 }
 
 Availability.init(
@@ -45,7 +45,7 @@ Availability.init(
       defaultValue: DataTypes.NOW,
     },
     updatedBy: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },

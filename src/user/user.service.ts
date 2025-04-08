@@ -11,7 +11,9 @@ export async function createUserService(createUserDto: CreateUserDTO) {
       password,
       email,
       firstName,
-      lastName
+      lastName,
+      isAdmin,
+      createdBy
     } = createUserDto;
 
     const existingUser = await User.findOne({
@@ -33,8 +35,9 @@ export async function createUserService(createUserDto: CreateUserDTO) {
       firstName,
       lastName,
       isActive: true,
+      isAdmin,
       dateRegistered: new Date(),
-      createdBy: 'ADMIN',
+      createdBy,
       updatedDateTime: null,
       updatedBy: null,
     });

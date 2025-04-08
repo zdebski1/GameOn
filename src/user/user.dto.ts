@@ -4,5 +4,7 @@ export interface CreateUserDTO {
     email: string;
     firstName: string;
     lastName: string;
+    isAdmin: boolean;
+    createdBy: number;
   }
   

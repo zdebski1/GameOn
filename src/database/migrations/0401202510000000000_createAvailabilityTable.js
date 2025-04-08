@@ -5,9 +5,9 @@ exports.up = function(knex) {
       table.integer('teamFk');
       table.timestamp('availableDateTime');
       table.timestamp('createdDateTime').defaultTo(knex.fn.now());
-      table.string('createdBy');
+      table.integer('createdBy');
       table.timestamp('updatedDateTime');
-      table.string('updatedBy');
+      table.integer('updatedBy');
     });
   };
   

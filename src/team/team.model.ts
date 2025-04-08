@@ -6,10 +6,11 @@ class Team extends Model<ITeamModel> implements ITeamModel {
   public teamId!: number;
   public teamName!: string;
   public isActive!: boolean;
+  public isOwner!: boolean;
   public createdDateTime!: Date;
-  public createdBy!: string;
+  public createdBy!: number;
   public updatedDateTime!: Date;
-  public updatedBy!: string
+  public updatedBy!: number
 }
 
 Team.init(
@@ -27,12 +28,16 @@ Team.init(
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
+    isOwner: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },    
     createdDateTime: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
     createdBy: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     updatedDateTime: {
@@ -40,7 +45,7 @@ Team.init(
       allowNull: true,
     },
     updatedBy: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
   },

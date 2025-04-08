@@ -7,10 +7,11 @@ exports.up = function(knex) {
       table.string('firstName');
       table.string('lastName');
       table.boolean('isActive');
+      table.boolean('isAdmin');
       table.timestamp('dateRegistered').defaultTo(knex.fn.now());
-      table.string('createdBy');
+      table.integer('createdBy');
       table.timestamp('updatedDateTime');
-      table.string('updatedBy');
+      table.integer('updatedBy');
     });
   };
   

@@ -2,11 +2,12 @@ exports.up = function(knex) {
     return knex.schema.createTable('team', function(table) {
       table.increments('teamId').primary();
       table.string('teamName');
-      table.boolean('isActive');           
+      table.boolean('isActive');
+      table.boolean('isOwner');          
       table.timestamp('createdDateTime').defaultTo(knex.fn.now());
-      table.string('createdBy');
+      table.integer('createdBy');
       table.timestamp('updatedDateTime');
-      table.string('updatedBy');
+      table.integer('updatedBy');
     });
   };
   

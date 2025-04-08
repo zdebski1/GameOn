@@ -6,14 +6,17 @@ export async function createTeamService (teamDto: TeamDto) {
   try {
     const {
         teamName,
+        isOwner,
+        createdBy
     } = teamDto;
 
 
     const newTeam = await Team.create({
         teamName,
         isActive: true,
+        isOwner,
         createdDateTime: new Date(),
-        createdBy: 'ADMIN',
+        createdBy,
         updatedDateTime: null,
         updatedBy: null
     });
@@ -37,7 +40,9 @@ export async function getAllTeamService(): Promise<TeamDto[]> {
 
     return teams.map(team => ({
       teamId: team.teamId,
-      teamName: team.teamName
+      teamName: team.teamName,
+      isOwner: team.isOwner,
+      createdBy: team.createdBy
     }));
   } catch (error) {
     console.error('Error fetching all teams: ', error);

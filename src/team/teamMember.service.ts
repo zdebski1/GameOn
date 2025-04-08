@@ -8,6 +8,7 @@ export async function teamMembersByTeamId(teamId: string): Promise<TeamMemberDto
   
       return teamMembers.map(member => ({
         teamMemberId: member.teamMemberId,
+        teamFk: member.teamFk,
         firstName: member.user.firstName,
         lastName: member.user.lastName,
         userIsActive: member.user.isActive

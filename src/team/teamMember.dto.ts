@@ -1,5 +1,6 @@
 export interface TeamMemberDto {
     teamMemberId: number;
+    teamFk: number;
     firstName: string,
     lastName: string,
     userIsActive: boolean

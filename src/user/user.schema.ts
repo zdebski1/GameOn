@@ -15,7 +15,7 @@ export const createUserSchema = {
         firstName: { type: 'string', minLength: 1 },
         lastName: { type: 'string', minLength: 1 },
         isAdmin: { type: 'boolean' },
-        createdBy: { type: 'string', minLength: 1 },
+        createdBy: { type: 'number', minLength: 1 },
       },
       errorMessage: {
         required: {
@@ -30,4 +30,3 @@ export const createUserSchema = {
       },
     },
   };
-  

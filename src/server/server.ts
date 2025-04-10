@@ -1,9 +1,13 @@
 import fastify from './app';
+require('dotenv').config();
 
 const start = async () => {
     try {
-        await fastify.listen({ port: 3000, host: '0.0.0.0' });
-        console.log('🚀 Server running at http://localhost:3000');
+        const port = Number(process.env.API_PORT)
+        const url = process.env.API_URL
+        
+        await fastify.listen({ port:port, host: '0.0.0.0' });
+        console.log(`Server running at ${url}:${port}`);
     } catch (err) {
         fastify.log.error(err);
         process.exit(1);

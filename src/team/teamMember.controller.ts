@@ -37,7 +37,11 @@ export async function createTeamMemberHandler (
       return reply.code(201).send(newTeamMember);
   
     } catch (error) {
-      console.error('Error creating team member: ', error);  
-      return reply.code(500).send({ message: 'Internal Server Error' });
+      console.error('Error creating team member: ', error);
+      
+      if (error instanceof Error && (error as any).statusCode === 409) {
+        return reply.code(409).send({ message: error.message });
     }
   }
+  return reply.code(500).send({ message: 'Internal Server Error' });
+}

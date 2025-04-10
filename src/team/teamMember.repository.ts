@@ -1,5 +1,5 @@
 import { User, TeamMember } from "../models";
-import { TeamMemberWithUserDto } from "./teamMember.dto";
+import { TeamMemberDto, TeamMemberWithUserDto } from "./teamMember.dto";
 import ITeamMemberModel from "./teamMember.interface";
 
 export async function getTeamMembersByTeamId(teamId: string): Promise<TeamMemberWithUserDto[]> {
@@ -14,7 +14,7 @@ export async function getTeamMembersByTeamId(teamId: string): Promise<TeamMember
           attributes: ['firstName', 'lastName'],
         },
       ],
-      attributes: ['teamMemberId', 'isActive', 'teamFk'],
+      attributes: ['teamMemberId', 'teamFk'],
     });
 
     return teamMembers.map(tm => {
@@ -29,4 +29,15 @@ export async function getTeamMembersByTeamId(teamId: string): Promise<TeamMember
 
 export async function createTeamMember(teamMemberModel: Omit<ITeamMemberModel, 'teamMemberId'>) {
   return TeamMember.create(teamMemberModel);
+}
+
+export async function getExistingTeamMember (teamMember: TeamMemberDto) {
+  try {
+    return TeamMember.findOne({
+      where:
+        [{userFk: teamMember.userFk}, {teamFk: teamMember.teamFk}, {isActive: true}],
+    });
+  } catch (error) {
+    console.error('Error fetching Team Members:', error);
+  }
 }

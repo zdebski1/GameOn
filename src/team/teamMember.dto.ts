@@ -2,14 +2,12 @@ export interface TeamMemberDto {
     teamMemberId?: number;
     teamFk: number;
     userFk: number;
-    isActive: boolean;
     createdBy: number;
 }
 
 export interface TeamMemberWithUserDto {
     teamMemberId?: number;
     teamFk: number;
-    isActive: boolean;
     user: {
       firstName: string;
       lastName: string;
@@ -21,6 +19,5 @@ export interface TeamMemberWithUserDto {
     teamMemberId?: number;
     teamFk: number;
     firstName: string,
-    lastName: string,
-    isActive: boolean
+    lastName: string
 }

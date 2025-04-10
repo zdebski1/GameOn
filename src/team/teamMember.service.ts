@@ -1,6 +1,7 @@
-import { getTeamMembersByTeamId } from "./teamMember.repository";
+import { getExistingTeamMember, getTeamMembersByTeamId } from "./teamMember.repository";
 import { TeamMemberDto, TeamMemberWithIdDto } from "./teamMember.dto";
 import { createTeamMember } from "./teamMember.repository";
+import { HttpError } from "../utils/httpError";
 
 
 export async function teamMembersByTeamId(teamId: string): Promise<TeamMemberWithIdDto[]> {
@@ -11,8 +12,7 @@ export async function teamMembersByTeamId(teamId: string): Promise<TeamMemberWit
       teamMemberId: member.teamMemberId,
       teamFk: member.teamFk,
       firstName: member.user.firstName,
-      lastName: member.user.lastName,
-      isActive: member.isActive
+      lastName: member.user.lastName
     }));
 
   } catch (error) {
@@ -28,7 +28,12 @@ export async function createTeamMemberService (teamMemberDto: TeamMemberDto) {
       userFk,
       createdBy,
     } = teamMemberDto;
-
+    
+    const existingTeamMember = await (getExistingTeamMember(teamMemberDto))
+    
+    if (existingTeamMember){ 
+        throw new HttpError("Team Member already Exists", 409);
+    }
 
     const newTeamMember = await createTeamMember({
         teamFk,
@@ -44,8 +49,7 @@ export async function createTeamMemberService (teamMemberDto: TeamMemberDto) {
       message: 'Team Memember created successfully',
       teamMember: {
         teamMemberId: newTeamMember.teamMemberId,
-        userFk: newTeamMember.userFk,
-        isActive: newTeamMember.isActive
+        userFk: newTeamMember.userFk
       },
     };
 

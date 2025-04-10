@@ -15,6 +15,6 @@ export async function findUserByUserName(userName: string) {
   });
 }
 
-export async function createUser(data: Omit<IUserModel, 'userId'>) {
-  return User.create(data);
+export async function createUser(userModel: Omit<IUserModel, 'userId'>) {
+  return User.create(userModel);
 }

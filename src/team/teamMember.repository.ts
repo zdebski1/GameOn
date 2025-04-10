@@ -27,6 +27,6 @@ export async function getTeamMembersByTeamId(teamId: string): Promise<TeamMember
   }
 }
 
-export async function createTeamMember(data: Omit<ITeamMemberModel, 'teamMemberId'>) {
-  return TeamMember.create(data);
+export async function createTeamMember(teamMemberModel: Omit<ITeamMemberModel, 'teamMemberId'>) {
+  return TeamMember.create(teamMemberModel);
 }

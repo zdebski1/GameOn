@@ -14,8 +14,8 @@ try {
   } catch (error) {
     console.error('Error logging in: ', error);
 
-    if (error instanceof Error && (error as any).statusCode === 409) {
-      return reply.code(409).send({ message: error.message });
+    if (error instanceof Error && (error as any).statusCode === 401) {
+      return reply.code(401).send({ message: error.message });
     }
     
     return reply.code(500).send({ message: 'Internal Server Error' });

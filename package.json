@@ -7,6 +7,7 @@
     "dotenv": "^16.4.7",
     "fastify": "^5.2.2",
     "fastify-plugin": "^5.0.1",
+    "jsonwebtoken": "^9.0.2",
     "knex": "^3.1.0",
     "node-fetch": "^3.3.2",
     "pg": "^8.14.1",
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.13",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"

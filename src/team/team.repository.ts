@@ -1,5 +1,7 @@
 import ITeamModel from "./team.interface";
 import Team from "./team.model";
+import { TeamDto } from "./team.dto";
+import { Op, Sequelize } from 'sequelize';
 
 export async function getAllTeams() {
     try {
@@ -12,6 +14,18 @@ export async function getAllTeams() {
     }
 }
 
-export async function createTeam(data: Omit<ITeamModel, 'teamId'>) {
-    return Team.create(data);
+export async function createTeam(teamModel: Omit<ITeamModel, 'teamId'>) {
+    return Team.create(teamModel);
+  }
+
+export async function getActiveTeamsByUser(teamModel: TeamDto) {
+    return Team.findOne({
+      where: {
+        [Op.and]: [
+          Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('teamName')), teamModel.teamName.toLowerCase()),
+          { createdBy: teamModel.createdBy },
+          { isOwner: true }
+        ],
+      },
+    });
   }

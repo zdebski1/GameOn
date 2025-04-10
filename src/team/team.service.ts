@@ -1,5 +1,7 @@
 import { TeamDto } from './team.dto';
 import { getAllTeams, createTeam } from './team.repository';
+import { HttpError } from '../utils/httpError';
+import { getActiveTeamsByUser } from './team.repository';
 
 export async function createTeamService (teamDto: TeamDto) {
   try {
@@ -9,6 +11,11 @@ export async function createTeamService (teamDto: TeamDto) {
         createdBy
     } = teamDto;
 
+    const existingTeam = await getActiveTeamsByUser(teamDto);
+
+    if (existingTeam) {
+      throw new HttpError('Team already exists', 409);
+    }
 
     const newTeam = await createTeam({
         teamName,

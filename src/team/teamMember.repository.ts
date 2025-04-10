@@ -5,10 +5,9 @@ import ITeamMemberModel from "./teamMember.interface";
 export async function getTeamMembersByTeamId(teamId: string): Promise<TeamMemberWithUserDto[]> {
   try {
     const teamMembers = await TeamMember.findAll({
-      where: {
-        teamFk: teamId,
-      },
-      include: [
+      where:
+        [{teamFk: teamId}, {isActive: true}],
+     include: [
         {
           model: User,
           as: 'user',

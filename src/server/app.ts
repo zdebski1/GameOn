@@ -6,6 +6,7 @@ import availabilityRoutes from '../availability/route';
 import teamRoutes from '../team/team.route';
 import teamMemberRoutes from '../team/teamMember.route';
 import { userRoutes } from '../user/user.route';
+import { authRoutes } from '../auth/auth.route';
 
 import cors from '@fastify/cors';
 
@@ -26,5 +27,6 @@ fastify.register(availabilityRoutes);
 fastify.register(teamRoutes);
 fastify.register(teamMemberRoutes);
 fastify.register(userRoutes);
+fastify.register(authRoutes);
 
 export default fastify;

@@ -4,9 +4,15 @@ import { IUserModel } from './user.interface';
 
 export async function findUserByEmail(email: string) {
   return User.findOne({
-    where: {
-      [Op.or]: [{ email }],
-    },
+    where: 
+      { email: email.toLowerCase()},
+  });
+}
+
+export async function findUserByUserName(userName: string) {
+  return User.findOne({
+    where: 
+      [{ userName: userName.toLowerCase() } , { isActive: true }],
   });
 }
 

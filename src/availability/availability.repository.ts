@@ -1,4 +1,4 @@
-import Availability from "./model";
+import Availability from "./availability.model";
 
 async function getAllAvailabilities() {
     try {

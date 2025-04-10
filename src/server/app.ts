@@ -2,7 +2,7 @@ import Fastify from 'fastify';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import ajvErrors from 'ajv-errors';
-import availabilityRoutes from '../availability/route';
+import availabilityRoutes from '../availability/availability.route';
 import teamRoutes from '../team/team.route';
 import teamMemberRoutes from '../team/teamMember.route';
 import { userRoutes } from '../user/user.route';

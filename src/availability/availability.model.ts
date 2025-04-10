@@ -1,4 +1,4 @@
-import IAvailabilityModel from './interface'; 
+import IAvailabilityModel from './availability.interface'; 
 import sequelizeDb from '../config/sequelizeDb';  
 import { DataTypes, Model } from 'sequelize';
 

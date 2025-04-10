@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import getAllAvailabilities from './repository';
+import getAllAvailabilities from './availability.repository';
 
 export default async function (fastify: FastifyInstance) {
     fastify.get('/availabilities', async (request, reply) => {

@@ -1,5 +1,4 @@
 import User from './user.model';
-import { Op } from 'sequelize';
 import { IUserModel } from './user.interface';
 
 export async function findUserByEmail(email: string) {

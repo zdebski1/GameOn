@@ -1,5 +1,5 @@
 import { TeamDto } from './team.dto';
-import { getAllTeams, createTeam } from './team.repository';
+import { getAllTeams, createTeam, getAllTeamsForUser } from './team.repository';
 import { HttpError } from '../utils/httpError';
 import { getActiveTeamsByUser } from './team.repository';
 
@@ -40,18 +40,20 @@ export async function createTeamService (teamDto: TeamDto) {
   }
 }
 
-export async function getAllTeamService(): Promise<TeamDto[]> {
+export async function getTeamsService(userId?: number): Promise<TeamDto[]> {
   try {
-    const teams = await getAllTeams() ?? [];
+    const teams = userId
+      ? await getAllTeamsForUser(userId)
+      : await getAllTeams();
 
-    return teams.map(team => ({
+    return (teams ?? []).map((team: TeamDto) => ({
       teamId: team.teamId,
       teamName: team.teamName,
       isOwner: team.isOwner,
-      createdBy: team.createdBy
+      createdBy: team.createdBy,
     }));
   } catch (error) {
-    console.error('Error fetching all teams: ', error);
+    console.error('Error fetching teams: ', error);
     throw error;
   }
 }

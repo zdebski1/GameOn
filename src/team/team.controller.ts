@@ -1,6 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { TeamDto } from './team.dto';
-import { createTeamService, getAllTeamService } from './team.service';
+import { createTeamService } from './team.service';
+import { getTeamsService } from './team.service';
 
 
 
@@ -23,16 +24,18 @@ export async function createTeamHandler (
 }
 
 
-export async function  getAllTeamsHandler (
-request: FastifyRequest,
-reply: FastifyReply
+export async function getAllTeamsHandler(
+  request: FastifyRequest<{ Querystring: { userId?: number } }>,
+  reply: FastifyReply
 ) {
   try {
-    const teams = await getAllTeamService();
-    reply.send(teams)
-  } catch (error) {
+    const { userId } = request.query;
 
-    console.error('Error getting all teams: ', error);
+    const teams = await getTeamsService(userId);
+
+    reply.send(teams);
+  } catch (error) {
+    console.error('Error getting teams: ', error);
     return reply.code(500).send({ message: 'Internal Server Error' });
   }
 }

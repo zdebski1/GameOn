@@ -2,6 +2,7 @@ import { CreateUserDTO } from './user.dto';
 import bcrypt from 'bcrypt';
 import { HttpError } from '../utils/httpError';
 import { findUserByEmail, createUser } from './user.repository';
+import { isAscii } from 'buffer';
 
 export async function createUserService(createUserDto: CreateUserDTO) {
   try {
@@ -9,9 +10,9 @@ export async function createUserService(createUserDto: CreateUserDTO) {
       userName,
       password,
       email,
+      phoneNumber,
       firstName,
       lastName,
-      isAdmin,
       createdBy
     } = createUserDto;
 
@@ -27,10 +28,14 @@ export async function createUserService(createUserDto: CreateUserDTO) {
       userName,
       password: hashedPassword,
       email,
+      phoneNumber,
       firstName,
       lastName,
       isActive: true,
-      isAdmin,
+      isAdmin: false,
+      isEmailVerified: false,
+      isPhoneNumberVerified: false,
+      profilePictureUrl: null,
       dateRegistered: new Date(),
       createdBy,
       updatedDateTime: null,
@@ -43,6 +48,15 @@ export async function createUserService(createUserDto: CreateUserDTO) {
         userId: newUser.userId,
         userName: newUser.userName,
         email: newUser.email,
+        phoneNumber: newUser.phoneNumber,
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        isActive: newUser.isActive,
+        isAdmin: newUser.isAdmin,
+        isEmailVerified: newUser.isEmailVerified,
+        isPhoneNumberVerified: newUser.isPhoneNumberVerified,
+        profilePictureUrl: newUser.profilePictureUrl,
+        dateRegistered: newUser.dateRegistered
       },
     };
   } catch (error) {

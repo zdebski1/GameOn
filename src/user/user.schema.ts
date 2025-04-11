@@ -1,7 +1,7 @@
 export const createUserSchema = {
     body: {
       type: 'object',
-      required: ['userName', 'password', 'email', 'firstName', 'lastName', 'isAdmin', 'createdBy'],
+      required: ['userName', 'password', 'email', 'firstName', 'lastName', 'createdBy'],
       properties: {
         userName: { type: 'string', minLength: 6, maxLength: 32 },
         password: {
@@ -12,9 +12,13 @@ export const createUserSchema = {
             'Password must contain at least one uppercase letter, one lowercase letter, and one special character.',
         },
         email: { type: 'string', format: 'email' },
+        phoneNumber: {
+          type: 'string',
+          pattern: '^[0-9]{10,15}$',
+          errorMessage: 'Phone number must be between 10 and 15 digits',
+        },
         firstName: { type: 'string', minLength: 1 },
         lastName: { type: 'string', minLength: 1 },
-        isAdmin: { type: 'boolean' },
         createdBy: { type: 'number'},
       },
       errorMessage: {
@@ -24,7 +28,6 @@ export const createUserSchema = {
           email: 'Email is required',
           firstName: 'First name is required',
           lastName: 'Last name is required',
-          isAdmin: 'isAdmin is required',
           createdBy: 'createdBy is required',
         },
       },

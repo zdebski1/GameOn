@@ -8,10 +8,14 @@ class User extends Model<IUserModel> implements IUserModel {
     public userName!: string;
     public password!: string;
     public email!: string;
+    public phoneNumber!: string;
     public firstName!: string;
     public lastName!: string;
     public isActive!: boolean;
     public isAdmin!: boolean;
+    public isEmailVerified!: boolean;
+    public isPhoneNumberVerified!: boolean;        
+    public profilePictureUrl!: string;    
     public dateRegistered!: Date;
     public createdBy!: number;
     public updatedDateTime!: Date;
@@ -44,6 +48,10 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    phoneNumber: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },    
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -59,7 +67,21 @@ User.init(
     isAdmin: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-    },                 
+    },
+    isEmailVerified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false, 
+      defaultValue: false
+    },  
+    isPhoneNumberVerified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false      
+    },  
+    profilePictureUrl: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },                               
     dateRegistered: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,

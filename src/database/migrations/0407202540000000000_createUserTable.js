@@ -4,10 +4,14 @@ exports.up = function(knex) {
       table.string('userName');
       table.string('password');
       table.string('email');
+      table.string('phoneNumber');
       table.string('firstName');
       table.string('lastName');
       table.boolean('isActive');
       table.boolean('isAdmin');
+      table.boolean('isEmailVerified');
+      table.boolean('isPhoneNumberVerified');      
+      table.string('profilePictureUrl');
       table.timestamp('dateRegistered').defaultTo(knex.fn.now());
       table.integer('createdBy');
       table.timestamp('updatedDateTime');

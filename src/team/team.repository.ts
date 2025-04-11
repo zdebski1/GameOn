@@ -23,8 +23,7 @@ export async function getActiveTeamsByUser(teamModel: TeamDto) {
       where: {
         [Op.and]: [
           Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('teamName')), teamModel.teamName.toLowerCase()),
-          { createdBy: teamModel.createdBy },
-          { isOwner: true }
+          { createdBy: teamModel.createdBy }
         ],
       },
     });

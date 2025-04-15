@@ -1,13 +1,13 @@
 exports.up = function(knex) {
     return knex.schema.createTable('teamMember', function(table) {
       table.increments('teamMemberId').primary();
-      table.integer('userFk');
+      table.integer('userFk').unsigned();
       table.boolean('isActive');
       table.integer('teamFk')
       table.timestamp('createdDateTime').defaultTo(knex.fn.now());
-      table.integer('createdBy');
+      table.integer('createdBy').unsigned();
       table.timestamp('updatedDateTime');
-      table.integer('updatedBy');
+      table.integer('updatedBy').unsigned();
     });
   };
   

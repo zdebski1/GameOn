@@ -5,9 +5,9 @@ exports.up = function(knex) {
       table.boolean('isActive');
       table.boolean('isOwner');          
       table.timestamp('createdDateTime').defaultTo(knex.fn.now());
-      table.integer('createdBy');
+      table.integer('createdBy').unsigned();
       table.timestamp('updatedDateTime');
-      table.integer('updatedBy');
+      table.integer('updatedBy').unsigned();
     });
   };
   

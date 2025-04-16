@@ -17,4 +17,16 @@ export const createUserPreferencesSchema = {
         },
       },
     },
+    params: {
+      type: 'object',
+      required: ['userId'],
+      properties: {
+        userId: { type: 'string', minLength: 1  },
+      },
+      errorMessage: {
+        required: {
+          teamId: 'userId is required in the URL',
+        },
+      },
+    },
   };

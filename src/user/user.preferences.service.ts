@@ -45,3 +45,22 @@ export async function createUserPreferenceService (createUserPreferenceDto: Crea
         throw error;
     }
 }
+
+
+export async function getUserPreferencesByUserIdService(userFk: number){
+    try{
+        const userPreference = await getUserPreferencesByUser(userFk);
+        
+        
+        return {
+            userFk: userPreference?.userFk,
+            allowEmailNotifications: userPreference?.allowEmailNotifications,
+            allowSmsNotifications: userPreference?.allowSmsNotifications,
+            marketingOptIn: userPreference?.marketingOptIn
+        }
+        
+    } catch (error) {
+        console.error('Error getting user preferences: ',(error as Error).message);
+        throw (error);
+    }
+}

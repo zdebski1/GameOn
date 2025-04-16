@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { CreateUserPreferenceDto } from './user.preference.dto';
-import { createUserPreferenceService } from './user.preferences.service';
+import { createUserPreferenceService, getUserPreferencesByUserIdService } from './user.preferences.service';
 
 export async function createUserPreferencesHandler(
   request: FastifyRequest<{ 
@@ -25,6 +25,27 @@ export async function createUserPreferencesHandler(
       return reply.code(409).send({ message: error.message });
     }
     
+    return reply.code(500).send({ message: 'Internal Server Error' });
+  }
+}
+
+export async function getUserPreferencesByUserHandler(
+  request: FastifyRequest<{ Params: { userId: string } }>,
+  reply: FastifyReply
+) {
+  try {
+    const { userId } = request.params;
+    const numericUserId = Number(userId);
+
+    if (isNaN(numericUserId)) {
+      return reply.code(400).send({ message: 'Invalid userId' });
+    }
+
+    const userPreferences = await getUserPreferencesByUserIdService(numericUserId);
+
+    return reply.code(200).send(userPreferences);
+  } catch (error) {
+    console.error('Error fetching user preferences: ', error);
     return reply.code(500).send({ message: 'Internal Server Error' });
   }
 }

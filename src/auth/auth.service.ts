@@ -10,9 +10,17 @@ export async function loginService ({
   userName: string,
   password: string
 }) {
+
   const user = await findUserByUserName(userName);
 
-  if (!user || !(await bcrypt.compare(password, user.password))) {
+  if (!user) {
+    throw new HttpError('Username or password is incorrect', 401);
+  }
+
+  const combinedPassword = password + user.uuid;
+  const isPasswordValid = await bcrypt.compare(combinedPassword, user.password);
+
+  if (!isPasswordValid) {
     throw new HttpError('Username or password is incorrect', 401);
   }
 

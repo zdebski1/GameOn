@@ -2,7 +2,7 @@ import { CreateUserDTO } from './user.dto';
 import bcrypt from 'bcrypt';
 import { HttpError } from '../utils/httpError';
 import { findUserByEmail, createUser } from './user.repository';
-import { isAscii } from 'buffer';
+import { v4 as uuidv4 } from 'uuid';
 
 export async function createUserService(createUserDto: CreateUserDTO) {
   try {
@@ -22,7 +22,9 @@ export async function createUserService(createUserDto: CreateUserDTO) {
       throw new HttpError('Email already exists', 409);
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const createdUuid: string = uuidv4();
+    const combinedPassword = password + createdUuid;
+    const hashedPassword = await bcrypt.hash(combinedPassword, 10);
 
     const newUser = await createUser({
       userName,
@@ -36,6 +38,7 @@ export async function createUserService(createUserDto: CreateUserDTO) {
       isEmailVerified: false,
       isPhoneNumberVerified: false,
       profilePictureUrl: null,
+      uuid: createdUuid, 
       dateRegistered: new Date(),
       createdBy,
       updatedDateTime: null,

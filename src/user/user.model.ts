@@ -16,6 +16,7 @@ class User extends Model<IUserModel> implements IUserModel {
     public isEmailVerified!: boolean;
     public isPhoneNumberVerified!: boolean;        
     public profilePictureUrl!: string;    
+    public uuid!: string;
     public dateRegistered!: Date;
     public createdBy!: number;
     public updatedDateTime!: Date;
@@ -81,7 +82,11 @@ User.init(
     profilePictureUrl: {
       type: DataTypes.STRING,
       allowNull: true,
-    },                               
+    },
+    uuid: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },                                   
     dateRegistered: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,

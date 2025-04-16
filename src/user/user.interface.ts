@@ -11,6 +11,7 @@ export interface IUserModel {
     isEmailVerified: boolean;
     isPhoneNumberVerified: boolean;
     profilePictureUrl: string | null;
+    uuid: string;
     dateRegistered: Date;
     createdBy: number;
     updatedDateTime?: Date | null ;

@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt';
 import { HttpError } from '../utils/httpError';
 import { findUserByEmail, createUser } from './user.repository';
 import { v4 as uuidv4 } from 'uuid';
+import { generateRandomNumber, addMinutesToDateTime } from '../utils/helperFunctions';
+
 
 export async function createUserService(createUserDto: CreateUserDTO) {
   try {
@@ -26,6 +28,9 @@ export async function createUserService(createUserDto: CreateUserDTO) {
     const combinedPassword = password + createdUuid;
     const hashedPassword = await bcrypt.hash(combinedPassword, 10);
 
+    const emailVerificationCode = (await generateRandomNumber(100000,900000)).toString()
+    const emailVerificationExpiresAt = addMinutesToDateTime(new Date(),15)
+
     const newUser = await createUser({
       userName,
       password: hashedPassword,
@@ -38,8 +43,10 @@ export async function createUserService(createUserDto: CreateUserDTO) {
       isEmailVerified: false,
       isPhoneNumberVerified: false,
       profilePictureUrl: null,
-      uuid: createdUuid, 
-      dateRegistered: new Date(),
+      uuid: createdUuid,
+      emailVerificationCode,
+      emailVerificationExpiresAt, 
+      createdDateTime: new Date(),
       createdBy,
       updatedDateTime: null,
       updatedBy: null,
@@ -58,8 +65,10 @@ export async function createUserService(createUserDto: CreateUserDTO) {
         isAdmin: newUser.isAdmin,
         isEmailVerified: newUser.isEmailVerified,
         isPhoneNumberVerified: newUser.isPhoneNumberVerified,
+        emailVerificationCode: newUser.emailVerificationCode,
+        emailVerificationExpiresAt: newUser.emailVerificationExpiresAt,
         profilePictureUrl: newUser.profilePictureUrl,
-        dateRegistered: newUser.dateRegistered
+        createdDateTime: newUser.createdDateTime
       },
     };
   } catch (error) {

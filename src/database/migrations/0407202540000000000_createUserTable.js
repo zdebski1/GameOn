@@ -12,8 +12,10 @@ exports.up = function(knex) {
       table.boolean('isEmailVerified');
       table.boolean('isPhoneNumberVerified');      
       table.string('profilePictureUrl');
-      table.string('uuid')
-      table.timestamp('dateRegistered').defaultTo(knex.fn.now());
+      table.string('uuid');
+      table.string('emailVerificationCode');
+      table.timestamp('emailVerificationExpiresAt');
+      table.timestamp('createdDateTime').defaultTo(knex.fn.now());
       table.integer('createdBy');
       table.timestamp('updatedDateTime');
       table.integer('updatedBy');

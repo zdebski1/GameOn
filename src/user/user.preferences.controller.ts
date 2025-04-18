@@ -1,6 +1,8 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { CreateUserPreferenceDto } from './user.preference.dto';
 import { createUserPreferenceService, getUserPreferencesByUserIdService } from './user.preferences.service';
+import { errorMessage } from '../utils/helperFunctions';
+import { listOfErrorCodes } from '../utils/globalVariables';
 
 export async function createUserPreferencesHandler(
   request: FastifyRequest<{ 
@@ -20,12 +22,7 @@ export async function createUserPreferencesHandler(
     return reply.code(201).send(newUserPreference);
   } catch (error) {
     console.error('Error creating user preference: ', error);
-
-    if (error instanceof Error && (error as any).statusCode === 409) {
-      return reply.code(409).send({ message: error.message });
-    }
-    
-    return reply.code(500).send({ message: 'Internal Server Error' });
+    await errorMessage(error, listOfErrorCodes, reply);
   }
 }
 
@@ -46,6 +43,6 @@ export async function getUserPreferencesByUserHandler(
     return reply.code(200).send(userPreferences);
   } catch (error) {
     console.error('Error fetching user preferences: ', error);
-    return reply.code(500).send({ message: 'Internal Server Error' });
+    await errorMessage(error, listOfErrorCodes, reply);
   }
 }

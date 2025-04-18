@@ -1,0 +1,1 @@
+export const listOfErrorCodes: Array<number> = [400,401,404,409]

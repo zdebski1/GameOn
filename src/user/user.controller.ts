@@ -1,6 +1,8 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { CreateUserDTO } from './user.dto';
 import { createUserService } from './user.service';
+import { errorMessage } from '../utils/helperFunctions';
+import { listOfErrorCodes } from '../utils/globalVariables';
 
 export async function createUserHandler(
   request: FastifyRequest<{ Body: CreateUserDTO }>,
@@ -12,11 +14,6 @@ export async function createUserHandler(
     return reply.code(201).send(newUser);
   } catch (error) {
     console.error('Error creating user: ', error);
-
-    if (error instanceof Error && (error as any).statusCode === 409) {
-      return reply.code(409).send({ message: error.message });
-    }
-    
-    return reply.code(500).send({ message: 'Internal Server Error' });
+    await errorMessage(error, listOfErrorCodes, reply);
   }
 }

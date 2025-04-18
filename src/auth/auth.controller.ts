@@ -1,6 +1,8 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { loginService } from "./auth.service";
 import { loginRequestDto } from "./auth.dto";
+import { errorMessage } from "../utils/helperFunctions";
+import { listOfErrorCodes } from "../utils/globalVariables";
 
 
 export async function loginController(
@@ -14,10 +16,6 @@ try {
   } catch (error) {
     console.error('Error logging in: ', error);
 
-    if (error instanceof Error && (error as any).statusCode === 401) {
-      return reply.code(401).send({ message: error.message });
-    }
-    
-    return reply.code(500).send({ message: 'Internal Server Error' });
+  await errorMessage(error, listOfErrorCodes, reply);
   }
 }

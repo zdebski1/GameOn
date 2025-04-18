@@ -1,6 +1,8 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { createTeamMemberService, teamMembersByTeamId } from "./teamMember.service";
 import { TeamMemberDto } from './teamMember.dto';
+import { listOfErrorCodes } from '../utils/globalVariables';
+import { errorMessage } from '../utils/helperFunctions';
 
 export async function getAllTeamMembersHandler(
     request: FastifyRequest<{ Params: { teamId: string } }>,
@@ -14,7 +16,7 @@ export async function getAllTeamMembersHandler(
       return reply.code(200).send(teamMembers);
     } catch (error) {
       console.error('Error getting team members:', error);
-      return reply.code(500).send({ message: 'Internal Server Error' });
+      await errorMessage(error, listOfErrorCodes, reply);
     }
   }
 
@@ -38,10 +40,6 @@ export async function createTeamMemberHandler (
   
     } catch (error) {
       console.error('Error creating team member: ', error);
-      
-      if (error instanceof Error && (error as any).statusCode === 409) {
-        return reply.code(409).send({ message: error.message });
-    }
-    return reply.code(500).send({ message: 'Internal Server Error' });
+      await errorMessage(error, listOfErrorCodes, reply);
   }
 }

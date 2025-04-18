@@ -2,6 +2,8 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 import { TeamDto } from './team.dto';
 import { createTeamService } from './team.service';
 import { getTeamsService } from './team.service';
+import { listOfErrorCodes } from '../utils/globalVariables';
+import { errorMessage } from '../utils/helperFunctions';
 
 
 
@@ -15,11 +17,7 @@ export async function createTeamHandler (
     return reply.code(201).send(newTeam);
   } catch (error) {
     console.error('Error creating team: ', error); 
-    
-    if (error instanceof Error && (error as any).statusCode === 409) {
-      return reply.code(409).send({ message: error.message });
-  }
-  return reply.code(500).send({ message: 'Internal Server Error' });
+    await errorMessage(error, listOfErrorCodes, reply);
 }
 }
 
@@ -36,6 +34,6 @@ export async function getAllTeamsHandler(
     reply.send(teams);
   } catch (error) {
     console.error('Error getting teams: ', error);
-    return reply.code(500).send({ message: 'Internal Server Error' });
+    await errorMessage(error, listOfErrorCodes, reply);
   }
 }

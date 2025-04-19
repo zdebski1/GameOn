@@ -4,6 +4,8 @@ import { HttpError } from '../utils/httpError';
 import { findUserByEmail, createUser } from './user.repository';
 import { v4 as uuidv4 } from 'uuid';
 import { generateRandomNumber, addMinutesToDateTime } from '../utils/helperFunctions';
+import { sendEmail } from '../utils/sendEmail';
+import { fromEmail } from '../utils/globalVariables';
 
 
 export async function createUserService(createUserDto: CreateUserDTO) {
@@ -30,6 +32,11 @@ export async function createUserService(createUserDto: CreateUserDTO) {
 
     const emailVerificationCode = (await generateRandomNumber(100000,900000)).toString()
     const emailVerificationExpiresAt = addMinutesToDateTime(new Date(),15)
+
+    const emailSubject = 'GameOn Verification Code'
+    const emailBody = `Your verification code is: ${emailVerificationCode}`   
+
+    await sendEmail(email,fromEmail, emailSubject,emailBody)
 
     const newUser = await createUser({
       userName,

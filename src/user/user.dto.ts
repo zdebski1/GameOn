@@ -8,3 +8,9 @@ export interface CreateUserDTO {
     createdBy: number;
   }
   
+export interface SendEmailToUserDto {
+  to: string;
+  from: string;
+  subject: string;
+  body: string;
+} 

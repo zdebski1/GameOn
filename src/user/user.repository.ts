@@ -23,6 +23,12 @@ export async function findUserByUserName(userName: string) {
   });
 }
 
+export async function findUserByUserId(userId: number) {
+  return User.findOne({
+    where: {userId: userId},
+  });
+}
+
 export async function createUser(userModel: Omit<IUserModel, 'userId'>) {
   return await User.create(userModel);
 }

@@ -36,7 +36,14 @@ export async function createUserService(createUserDto: CreateUserDTO) {
     const emailSubject = 'GameOn Verification Code'
     const emailBody = `Your verification code is: ${emailVerificationCode}`   
 
-    await sendEmail(email,fromEmail, emailSubject,emailBody)
+    const sendEmailToUserDto ={
+      to: email,
+      from: fromEmail,
+      subject: emailSubject,
+      body: emailBody
+    };
+
+    await sendEmail(sendEmailToUserDto)
 
     const newUser = await createUser({
       userName,
@@ -72,8 +79,6 @@ export async function createUserService(createUserDto: CreateUserDTO) {
         isAdmin: newUser.isAdmin,
         isEmailVerified: newUser.isEmailVerified,
         isPhoneNumberVerified: newUser.isPhoneNumberVerified,
-        emailVerificationCode: newUser.emailVerificationCode,
-        emailVerificationExpiresAt: newUser.emailVerificationExpiresAt,
         profilePictureUrl: newUser.profilePictureUrl,
         createdDateTime: newUser.createdDateTime
       },

@@ -1,16 +1,23 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { createUserVerifyService } from "./user.verify.service";
+import { createUserEmailVerifyService } from "./user.verify.service";
 import { CreateUserVerifyDto } from "./user.verify.dto";
 import { errorMessage } from "../utils/helperFunctions";
 import { listOfErrorCodes } from "../utils/globalVariables";
 
-export async function createUserVerifyHandler(
-    request: FastifyRequest<{Body: CreateUserVerifyDto}>,
+export async function createUserEmailVerifyHandler(
+    request: FastifyRequest<{
+      Body: CreateUserVerifyDto
+      Params: { userId: string },
+    }>,
     reply: FastifyReply
   ) {
     try{
-        const createUserVerifyDto = request.body;
-        const newUserVerification = await createUserVerifyService(createUserVerifyDto);
+      const {userId} = request.params;
+      const createUserVerifyDto = {
+          ...request.body,
+          userId: Number(userId),
+        };
+        const newUserVerification = await createUserEmailVerifyService(createUserVerifyDto);
         return reply.code(201).send(newUserVerification);
     }catch(error){
       console.error('Error with user verification: ', error)

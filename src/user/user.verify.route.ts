@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify";
-import { createUserVerifyHandler } from "./user.verify.controller";
+import { createUserEmailVerifyHandler } from "./user.verify.controller";
+import { createUserEmailVerificationSchema } from "./user.verify.schema";
 
 export async function userVerifyRoutes(fastify:FastifyInstance) {
-    fastify.post('/users/verify', createUserVerifyHandler);
+    fastify.post('/users/:userId/verify',{schema: createUserEmailVerificationSchema},createUserEmailVerifyHandler);
 }

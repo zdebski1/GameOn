@@ -1,15 +1,15 @@
 import { HttpError } from "../utils/httpError";
-import { findUserByEmail } from "./user.repository";
+import { findUserByEmail, findUserByUserId } from "./user.repository";
 import { CreateUserVerifyDto } from "./user.verify.dto";
 import { updateUserEmailVerifiedStatus } from "./user.verify.repository";
 
-export async function createUserVerifyService(createUserVerifyDto: CreateUserVerifyDto) {
+export async function createUserEmailVerifyService(createUserVerifyDto: CreateUserVerifyDto) {
     const {
-        email,
+        userId,
         emailVerificationCode
     } = createUserVerifyDto;
 
-    const user = await findUserByEmail(email)
+    const user = await findUserByUserId(userId)
     const nowDateTime: Date = new Date;
 
     if (!user){

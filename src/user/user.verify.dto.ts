@@ -1,4 +1,4 @@
 export interface CreateUserVerifyDto {
-    email: string,
+    userId: number;
     emailVerificationCode: string
 }

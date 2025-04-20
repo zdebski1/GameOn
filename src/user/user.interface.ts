@@ -1,6 +1,5 @@
 export interface IUserModel {
     userId?: number;
-    userName: string;
     password: string;
     email: string;
     phoneNumber: string;

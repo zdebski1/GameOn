@@ -12,17 +12,6 @@ export async function findUserByEmail(email: string) {
   });
 }
 
-export async function findUserByUserName(userName: string) {
-  return User.findOne({
-    where: {
-      [Op.and]: [
-        Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('userName')), userName.toLowerCase()),
-        { isActive: true },
-      ],
-    },
-  });
-}
-
 export async function findUserByUserId(userId: number) {
   return User.findOne({
     where: {userId: userId},

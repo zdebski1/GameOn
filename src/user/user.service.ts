@@ -11,7 +11,6 @@ import { fromEmail } from '../utils/globalVariables';
 export async function createUserService(createUserDto: CreateUserDTO) {
   try {
     const {
-      userName,
       password,
       email,
       phoneNumber,
@@ -46,7 +45,6 @@ export async function createUserService(createUserDto: CreateUserDTO) {
     await sendEmail(sendEmailToUserDto)
 
     const newUser = await createUser({
-      userName,
       password: hashedPassword,
       email,
       phoneNumber,
@@ -70,7 +68,6 @@ export async function createUserService(createUserDto: CreateUserDTO) {
       message: 'User created successfully',
       user: {
         userId: newUser.userId,
-        userName: newUser.userName,
         email: newUser.email,
         phoneNumber: newUser.phoneNumber,
         firstName: newUser.firstName,

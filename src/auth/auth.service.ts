@@ -12,6 +12,10 @@ export async function loginService (loginRequestDto: LoginRequestDto) {
     throw new HttpError('Username or password is incorrect', 401);
   }
 
+  if (!user.isEmailVerified && !user.isPhoneNumberVerified) {
+    throw new HttpError('User not verified', 403);
+  }
+
   const combinedPassword = loginRequestDto.password + user.uuid;
   const isPasswordValid = await bcrypt.compare(combinedPassword, user.password);
 

@@ -10,14 +10,14 @@ import { listOfErrorCodes } from "../utils/globalVariables";
 export async function createUserEmailVerifyHandler(
   request: FastifyRequest<{
     Body: CreateUserVerifyDto;
-    Params: { userId: string };
   }>,
   reply: FastifyReply
 ) {
   try {
+    const user = request.user as { userId: number };
     const createUserVerifyDto = {
       ...request.body,
-      userId: Number(request.params.userId),
+      userId: user.userId,
     };
     return reply
       .code(201)
@@ -31,14 +31,14 @@ export async function createUserEmailVerifyHandler(
 export async function createResendUserEmailVerificationHandler(
   request: FastifyRequest<{
     Body: CreateUserVerifyDto;
-    Params: { userId: string };
   }>,
   reply: FastifyReply
 ) {
   try {
+    const user = request.user as { userId: number };
     return reply
       .code(201)
-      .send(await resendVerificationCodeToEmail(Number(request.params.userId)));
+      .send(await resendVerificationCodeToEmail(user.userId));
   } catch (error) {
     console.error("Error resending user verification: ", error);
     await errorMessage(error, listOfErrorCodes, reply);

@@ -9,15 +9,15 @@ import { listOfErrorCodes } from "../utils/globalVariables";
 
 export async function createUserPreferencesHandler(
   request: FastifyRequest<{
-    Params: { userId: string };
     Body: Omit<CreateUserPreferenceDto, "userFk">;
   }>,
   reply: FastifyReply
 ) {
   try {
+    const user = request.user as { userId: number };
     const createUserPreferenceDto = {
       ...request.body,
-      userFk: Number(request.params.userId),
+      userFk: user.userId,
     };
     return reply
       .code(201)
@@ -29,17 +29,14 @@ export async function createUserPreferencesHandler(
 }
 
 export async function getUserPreferencesByUserHandler(
-  request: FastifyRequest<{
-    Params: { userId: string };
-  }>,
+  request: FastifyRequest,
   reply: FastifyReply
 ) {
   try {
+    const user = request.user as { userId: number };
     return reply
       .code(200)
-      .send(
-        await getUserPreferencesByUserIdService(Number(request.params.userId))
-      );
+      .send(await getUserPreferencesByUserIdService(user.userId));
   } catch (error) {
     console.error("Error fetching user preferences: ", error);
     await errorMessage(error, listOfErrorCodes, reply);

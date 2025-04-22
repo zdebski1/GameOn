@@ -8,14 +8,14 @@ import { errorMessage } from "../utils/helperFunctions";
 export async function createTeamHandler(
   request: FastifyRequest<{
     Body: CreateTeamDto;
-    Params: { userId: string };
   }>,
   reply: FastifyReply
 ) {
   try {
+    const user = request.user as { userId: number };
     const createTeamDto = {
       ...request.body,
-      userId: Number(request.params.userId),
+      userId: user.userId,
     };
     return reply.code(201).send(await createTeamService(createTeamDto));
   } catch (error) {
@@ -25,13 +25,12 @@ export async function createTeamHandler(
 }
 
 export async function getAllTeamsHandler(
-  request: FastifyRequest<{
-    Params: { userId: string };
-  }>,
+  request: FastifyRequest,
   reply: FastifyReply
 ) {
   try {
-    reply.send(await getTeamsService(Number(request.params.userId)));
+    const user = request.user as { userId: number };
+    reply.send(await getTeamsService(user.userId));
   } catch (error) {
     console.error("Error getting teams: ", error);
     await errorMessage(error, listOfErrorCodes, reply);

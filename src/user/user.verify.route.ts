@@ -4,19 +4,23 @@ import {
   createUserEmailVerifyHandler,
 } from "./user.verify.controller";
 import {
-  createUserEmailVerificationSchema,
-  resendUserEmailVerificationSchema,
+  createUserEmailVerificationSchema
 } from "./user.verify.schema";
 
 export async function userVerifyRoutes(fastify: FastifyInstance) {
-  fastify.post(
-    "/users/:userId/verify",
-    { schema: createUserEmailVerificationSchema },
-    createUserEmailVerifyHandler
-  );
-  fastify.post(
-    "/users/:userId/verify-resend",
-    { schema: resendUserEmailVerificationSchema },
-    createResendUserEmailVerificationHandler
-  );
+  fastify.register(async (userScope) => {
+    userScope.addHook("preHandler", async (request) => {
+      await request.jwtVerify();
+    });
+
+    userScope.post(
+      "/users/verify",
+      { schema: createUserEmailVerificationSchema },
+      createUserEmailVerifyHandler
+    );
+    userScope.post(
+      "/users/verify-resend",
+      createResendUserEmailVerificationHandler
+    );
+  });
 }

@@ -18,17 +18,5 @@ export const createUserPreferencesSchema = {
         marketingOptIn: "MarketingOptIn is required",
       },
     },
-  },
-  params: {
-    type: "object",
-    required: ["userId"],
-    properties: {
-      userId: { type: "string", minLength: 1 },
-    },
-    errorMessage: {
-      required: {
-        teamId: "userId is required in the URL",
-      },
-    },
-  },
+  }
 };

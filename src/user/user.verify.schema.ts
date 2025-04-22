@@ -11,31 +11,4 @@ export const createUserEmailVerificationSchema = {
       },
     },
   },
-  params: {
-    type: "object",
-    required: ["userId"],
-    properties: {
-      userId: { type: "string", minLength: 1, maxLength: 32 },
-    },
-    errorMessage: {
-      required: {
-        userId: "userId is required in the URL",
-      },
-    },
-  },
-};
-
-export const resendUserEmailVerificationSchema = {
-  params: {
-    type: "object",
-    required: ["userId"],
-    properties: {
-      userId: { type: "string", minLength: 1, maxLength: 32 },
-    },
-    errorMessage: {
-      required: {
-        userId: "userId is required in the URL",
-      },
-    },
-  },
 };

@@ -6,10 +6,19 @@ import {
 } from "./user.preferences.controller";
 
 export async function userPreferencesRoutes(fastify: FastifyInstance) {
-  fastify.post(
-    "/users/:userId/preferences",
-    { schema: createUserPreferencesSchema },
-    createUserPreferencesHandler
-  );
-  fastify.get("/users/:userId/preferences", getUserPreferencesByUserHandler);
+  fastify.register(async (userScope) => {
+    userScope.addHook("preHandler", async (request) => {
+      await request.jwtVerify();
+    });
+
+    userScope.post(
+      "/users/preferences",
+      { schema: createUserPreferencesSchema },
+      createUserPreferencesHandler
+    );
+    userScope.get(
+      "/users/preferences",
+      getUserPreferencesByUserHandler
+    );
+  });
 }

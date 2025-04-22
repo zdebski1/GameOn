@@ -47,7 +47,9 @@ export async function getAllTeamsForUser(userId: number) {
       SELECT 
         t."teamId",
         t."teamName",
-        t."isOwner",
+        CASE WHEN tm."userFk" = t."createdBy" THEN true
+        ELSE false
+        END AS "isOwner",
         t."createdBy"
       FROM public."teamMember" tm
       INNER JOIN public.team t ON tm."teamFk" = t."teamId"

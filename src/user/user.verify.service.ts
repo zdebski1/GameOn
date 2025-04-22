@@ -35,8 +35,13 @@ export async function createUserEmailVerifyService(
   if (user.isEmailVerified == true) {
     throw new HttpError("Email already verified", 400);
   }
-
-  await updateUserEmailVerifiedStatus(user.userId);
+  const updateUserEmailVerifiedStatusDto = {
+    userId: user.userId,
+    updatedBy: user.userId,
+    updatedDateTime: new Date(),
+  };
+  
+  await updateUserEmailVerifiedStatus(updateUserEmailVerifiedStatusDto);
 
   return {
     message: "Email Verified Successfully",

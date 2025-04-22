@@ -1,13 +1,20 @@
 import User from "./user.model";
-import { UpdateEmailCodeAndTimeDto } from "./user.verify.dto";
+import {
+  UpdateEmailCodeAndTimeDto,
+  UpdateUserEmailVerifiedStatusDto,
+} from "./user.verify.dto";
 
-export async function updateUserEmailVerifiedStatus(userId: number) {
+export async function updateUserEmailVerifiedStatus(
+  updateUserEmailVerifiedStatusDto: UpdateUserEmailVerifiedStatusDto
+) {
   await User.update(
     {
       isEmailVerified: true,
+      updatedBy: updateUserEmailVerifiedStatusDto.updatedBy,
+      updatedDateTime: updateUserEmailVerifiedStatusDto.updatedDateTime,
     },
     {
-      where: { userId },
+      where: { userId: updateUserEmailVerifiedStatusDto.userId },
     }
   );
 }

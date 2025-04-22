@@ -5,16 +5,16 @@ import { getTeamsOwnedByUser } from "./team.repository";
 
 export async function createTeamService(createTeamDto: CreateTeamDto) {
   try {
-    const { teamName, isOwner, userId } = createTeamDto;
+    const { teamName, userId } = createTeamDto;
 
-    if (await getTeamsOwnedByUser(createTeamDto)) {
+    if (await getTeamsOwnedByUser(createTeamDto.userId, createTeamDto.teamName)) {
       throw new HttpError("Team already exists", 409);
     }
 
     const newTeam = await createTeam({
       teamName,
       isActive: true,
-      isOwner,
+      isOwner: true,
       createdDateTime: new Date(),
       createdBy: userId,
       updatedDateTime: null,
@@ -24,8 +24,7 @@ export async function createTeamService(createTeamDto: CreateTeamDto) {
     return {
       message: "Team created successfully",
       team: {
-        teamName: newTeam.teamName,
-        isOwner: newTeam.isOwner,
+        teamName: newTeam.teamName
       },
     };
   } catch (error) {

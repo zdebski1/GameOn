@@ -1,6 +1,5 @@
 import ITeamModel from "./team.interface";
 import Team from "./team.model";
-import { TeamDto } from "./team.dto";
 import { Op, Sequelize } from "sequelize";
 import sequelizeDb from "../config/sequelizeDb";
 
@@ -18,19 +17,19 @@ export async function createTeam(teamModel: Omit<ITeamModel, "teamId">) {
   return Team.create(teamModel);
 }
 
-export async function getTeamsOwnedByUser(teamDto: TeamDto) {
+export async function getTeamsOwnedByUser(userId: number, teamName: String) {
   return Team.findOne({
     where: {
       [Op.and]: [
         Sequelize.where(
           Sequelize.fn("LOWER", Sequelize.col("teamName")),
-          teamDto.teamName.toLowerCase()
+          teamName.toLowerCase()
         ),
-        { createdBy: teamDto.userId },
+        { createdBy: userId },
       ],
     },
   });
-}
+} 
 
 export async function getAllTeamsForUser(userId: number) {
   const results = await sequelizeDb.query(

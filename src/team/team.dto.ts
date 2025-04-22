@@ -7,7 +7,6 @@ export interface TeamDto {
   
   export interface CreateTeamDto {
     teamName: string;
-    isOwner: boolean;
     userId: number;
   }
   

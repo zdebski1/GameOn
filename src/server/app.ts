@@ -11,8 +11,9 @@ import { authRoutes } from "../auth/auth.route";
 import cors from "@fastify/cors";
 import { userPreferencesRoutes } from "../user/user.preferences.route";
 import { userVerifyRoutes } from "../user/user.verify.route";
-
 import fastifyJwt from '@fastify/jwt';
+
+
 const fastify = Fastify({ logger: true });
 
 fastify.register(cors, {
@@ -24,6 +25,10 @@ fastify.setValidatorCompiler(({ schema }) => {
   addFormats(ajv);
   ajvErrors(ajv);
   return ajv.compile(schema);
+});
+
+fastify.register(fastifyJwt, {
+  secret: process.env.JWT_SECRET!
 });
 
 fastify.register(availabilityRoutes);

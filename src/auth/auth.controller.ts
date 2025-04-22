@@ -10,11 +10,9 @@ export async function loginController(
     reply: FastifyReply
 ) {
 try {
-    const newLogin = await loginService(request.body);
-    return reply.code(201).send(newLogin);
+    return reply.code(201).send(await loginService(request.body));
   } catch (error) {
     console.error('Error logging in: ', error);
-
-  await errorMessage(error, listOfErrorCodes, reply);
+    await errorMessage(error, listOfErrorCodes, reply);
   }
 }

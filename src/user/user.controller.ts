@@ -9,8 +9,7 @@ export async function createUserHandler(
   reply: FastifyReply
 ) {
   try {
-    const newUser = await createUserService(request.body);
-    return reply.code(201).send(newUser);
+    return reply.code(201).send(await createUserService(request.body));
   } catch (error) {
     console.error('Error creating user: ', error);
     await errorMessage(error, listOfErrorCodes, reply);

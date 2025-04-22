@@ -9,11 +9,7 @@ export async function getAllTeamMembersHandler(
     reply: FastifyReply
   ) {
     try {
-      const { teamId } = request.params;
-  
-      const teamMembers = await teamMembersByTeamId(teamId);
-  
-      return reply.code(200).send(teamMembers);
+      return reply.code(200).send(await teamMembersByTeamId(request.params.teamId));
     } catch (error) {
       console.error('Error getting team members:', error);
       await errorMessage(error, listOfErrorCodes, reply);
@@ -29,15 +25,11 @@ export async function createTeamMemberHandler (
     reply: FastifyReply
   ) {
     try {
-      const { teamId } = request.params;
       const teamMemberDto = {
         ...request.body,
-        teamFk: Number(teamId),
+        teamFk: Number(request.params.teamId),
       };
-  
-      const newTeamMember = await createTeamMemberService(teamMemberDto);
-      return reply.code(201).send(newTeamMember);
-  
+      return reply.code(201).send(await createTeamMemberService(teamMemberDto));
     } catch (error) {
       console.error('Error creating team member: ', error);
       await errorMessage(error, listOfErrorCodes, reply);

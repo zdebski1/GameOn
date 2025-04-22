@@ -12,13 +12,11 @@ export async function createUserEmailVerifyHandler(
     reply: FastifyReply
   ) {
     try{
-      const {userId} = request.params;
       const createUserVerifyDto = {
           ...request.body,
-          userId: Number(userId),
+          userId: Number(request.params.userId),
         };
-        const newUserVerification = await createUserEmailVerifyService(createUserVerifyDto);
-        return reply.code(201).send(newUserVerification);
+        return reply.code(201).send(await createUserEmailVerifyService(createUserVerifyDto));
     }catch(error){
       console.error('Error with user verification: ', error)
       await errorMessage(error, listOfErrorCodes, reply);
@@ -34,8 +32,7 @@ export async function createResendUserEmailVerificationHandler(
     reply: FastifyReply
   ) {
     try{
-      const resendEmailVerificationCode = await resendVerificationCodeToEmail(Number(request.params.userId));
-      return reply.code(201).send(resendEmailVerificationCode);
+      return reply.code(201).send(await resendVerificationCodeToEmail(Number(request.params.userId)));
     }catch(error){
       console.error('Error resending user verification: ', error)
       await errorMessage(error, listOfErrorCodes, reply);

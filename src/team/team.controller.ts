@@ -11,10 +11,8 @@ export async function createTeamHandler (
   request: FastifyRequest<{ Body: TeamDto }>,
   reply: FastifyReply
 ) {
-  try {
-    const teamDto = request.body;
-    const newTeam = await createTeamService(teamDto);
-    return reply.code(201).send(newTeam);
+  try {;
+    return reply.code(201).send(await createTeamService(request.body));
   } catch (error) {
     console.error('Error creating team: ', error); 
     await errorMessage(error, listOfErrorCodes, reply);
@@ -23,15 +21,13 @@ export async function createTeamHandler (
 
 
 export async function getAllTeamsHandler(
-  request: FastifyRequest<{ Querystring: { userId?: number } }>,
+  request: FastifyRequest<{
+    Params: { userId: string } 
+  }>,
   reply: FastifyReply
 ) {
   try {
-    const { userId } = request.query;
-
-    const teams = await getTeamsService(userId);
-
-    reply.send(teams);
+    reply.send(await getTeamsService(Number(request.params.userId)));
   } catch (error) {
     console.error('Error getting teams: ', error);
     await errorMessage(error, listOfErrorCodes, reply);

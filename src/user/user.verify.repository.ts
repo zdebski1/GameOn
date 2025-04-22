@@ -4,7 +4,7 @@ import { UpdateEmailCodeAndTimeDto } from "./user.verify.dto";
 export async function updateUserEmailVerifiedStatus(userId: number) {
   await User.update(
     {
-      isEmailVerified: true
+      isEmailVerified: true,
     },
     {
       where: { userId },
@@ -12,16 +12,19 @@ export async function updateUserEmailVerifiedStatus(userId: number) {
   );
 }
 
-export async function updateEmailCodeAndTime(updateEmailCodeAndTimeDto: UpdateEmailCodeAndTimeDto) {
+export async function updateEmailCodeAndTime(
+  updateEmailCodeAndTimeDto: UpdateEmailCodeAndTimeDto
+) {
   await User.update(
     {
       emailVerificationCode: updateEmailCodeAndTimeDto.emailVerificationCode,
-      emailVerificationExpiresAt: updateEmailCodeAndTimeDto.emailVerificationExpiresAt,
+      emailVerificationExpiresAt:
+        updateEmailCodeAndTimeDto.emailVerificationExpiresAt,
       updatedBy: updateEmailCodeAndTimeDto.updatedBy,
-      updatedDateTime: updateEmailCodeAndTimeDto.updatedDateTime
+      updatedDateTime: updateEmailCodeAndTimeDto.updatedDateTime,
     },
     {
-      where: { userId: updateEmailCodeAndTimeDto.userId }
+      where: { userId: updateEmailCodeAndTimeDto.userId },
     }
   );
 }

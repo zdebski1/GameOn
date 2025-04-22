@@ -1,12 +1,13 @@
 export interface TeamDto {
-    teamId?: number,
-    teamName: string,
-    isOwner: boolean,
-    userId: number
-}
-
-export interface CreateTeamDto {
-    teamName: string,
-    isOwner: boolean,
-    userId: number
-}
+    teamId?: number;
+    teamName: string;
+    isOwner: boolean;
+    userId: number;
+  }
+  
+  export interface CreateTeamDto {
+    teamName: string;
+    isOwner: boolean;
+    userId: number;
+  }
+  

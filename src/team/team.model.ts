@@ -1,6 +1,6 @@
-import ITeamModel from './team.interface';
-import sequelizeDb from '../config/sequelizeDb';
-import { DataTypes, Model } from 'sequelize';
+import ITeamModel from "./team.interface";
+import sequelizeDb from "../config/sequelizeDb";
+import { DataTypes, Model } from "sequelize";
 
 class Team extends Model<ITeamModel> implements ITeamModel {
   public teamId!: number;
@@ -10,7 +10,7 @@ class Team extends Model<ITeamModel> implements ITeamModel {
   public createdDateTime!: Date;
   public createdBy!: number;
   public updatedDateTime!: Date;
-  public updatedBy!: number
+  public updatedBy!: number;
 }
 
 Team.init(
@@ -51,7 +51,7 @@ Team.init(
   },
   {
     sequelize: sequelizeDb,
-    tableName: 'team',
+    tableName: "team",
     timestamps: false,
   }
 );

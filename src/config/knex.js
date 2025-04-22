@@ -1,7 +1,7 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const pg = require('knex')({
-  client: 'pg',
+const pg = require("knex")({
+  client: "pg",
   connection: {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,

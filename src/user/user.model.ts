@@ -1,7 +1,7 @@
-import { IUserModel } from './user.interface';
-import sequelizeDb from '../config/sequelizeDb';
-import { DataTypes, Model } from 'sequelize';
-import TeamMember from '../team/teamMember.model';
+import { IUserModel } from "./user.interface";
+import sequelizeDb from "../config/sequelizeDb";
+import { DataTypes, Model } from "sequelize";
+import TeamMember from "../team/teamMember.model";
 
 class User extends Model<IUserModel> implements IUserModel {
   public userId!: number;
@@ -25,8 +25,8 @@ class User extends Model<IUserModel> implements IUserModel {
 
   static associate(models: { TeamMember: typeof TeamMember }) {
     User.hasMany(models.TeamMember, {
-      foreignKey: 'userFk',
-      as: 'teamMembers',
+      foreignKey: "userFk",
+      as: "teamMembers",
     });
   }
 }
@@ -69,12 +69,12 @@ User.init(
     isEmailVerified: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false
+      defaultValue: false,
     },
     isPhoneNumberVerified: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false
+      defaultValue: false,
     },
     profilePictureUrl: {
       type: DataTypes.STRING,
@@ -111,7 +111,7 @@ User.init(
   },
   {
     sequelize: sequelizeDb,
-    tableName: 'user',
+    tableName: "user",
     timestamps: false,
   }
 );

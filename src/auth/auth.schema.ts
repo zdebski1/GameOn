@@ -1,10 +1,10 @@
 export const loginSchema = {
   body: {
-    type: 'object',
-    required: ['email', 'password'],
+    type: "object",
+    required: ["email", "password"],
     properties: {
-      password: { type: 'string' },
-      email: { type: 'string' }
+      password: { type: "string" },
+      email: { type: "string" },
     },
-  }
+  },
 };

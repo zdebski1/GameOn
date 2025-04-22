@@ -1,27 +1,27 @@
 export const createTeamMemberSchema = {
   body: {
-    type: 'object',
-    required: ['userFk', 'createdBy'],
+    type: "object",
+    required: ["userFk", "createdBy"],
     properties: {
-      userFk: { type: 'number' },
-      createdBy: { type: 'number' },
+      userFk: { type: "number" },
+      createdBy: { type: "number" },
     },
     errorMessage: {
       required: {
-        userFk: 'userFk is required',
-        createdBy: 'Email is required',
+        userFk: "userFk is required",
+        createdBy: "Email is required",
       },
     },
   },
   params: {
-    type: 'object',
-    required: ['teamId'],
+    type: "object",
+    required: ["teamId"],
     properties: {
-      teamId: { type: 'string', minLength: 1 },
+      teamId: { type: "string", minLength: 1 },
     },
     errorMessage: {
       required: {
-        teamId: 'teamId is required in the URL',
+        teamId: "teamId is required in the URL",
       },
     },
   },

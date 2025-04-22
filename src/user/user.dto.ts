@@ -12,4 +12,4 @@ export interface SendEmailToUserDto {
   from: string;
   subject: string;
   body: string;
-} 
+}

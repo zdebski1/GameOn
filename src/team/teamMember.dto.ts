@@ -18,6 +18,6 @@ export interface TeamMemberWithUserDto {
 export interface TeamMemberWithIdDto {
   teamMemberId?: number;
   teamFk: number;
-  firstName: string,
-  lastName: string
+  firstName: string;
+  lastName: string;
 }

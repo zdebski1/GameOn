@@ -1,20 +1,22 @@
-import sequelizeDb from '../config/sequelizeDb';  
-import { DataTypes, Model } from 'sequelize';
-import { IUserPreferencesModel } from './user.preferences.interface';
+import sequelizeDb from "../config/sequelizeDb";
+import { DataTypes, Model } from "sequelize";
+import { IUserPreferencesModel } from "./user.preferences.interface";
 
-class UserPreferences extends Model<IUserPreferencesModel> implements IUserPreferencesModel {
-    public userPreferenceId!: number;
-    public userFk!: number;
-    public allowSmsNotifications!: boolean;
-    public allowEmailNotifications!: boolean;
-    public marketingOptIn!: boolean;
-    public createdDate!: Date;
-    public createdBy!: number;
-    public updatedDateTime!: Date;
-    public updatedBy!: number;
- 
-  }
-  UserPreferences.init(
+class UserPreferences
+  extends Model<IUserPreferencesModel>
+  implements IUserPreferencesModel
+{
+  public userPreferenceId!: number;
+  public userFk!: number;
+  public allowSmsNotifications!: boolean;
+  public allowEmailNotifications!: boolean;
+  public marketingOptIn!: boolean;
+  public createdDate!: Date;
+  public createdBy!: number;
+  public updatedDateTime!: Date;
+  public updatedBy!: number;
+}
+UserPreferences.init(
   {
     userPreferenceId: {
       type: DataTypes.INTEGER,
@@ -36,7 +38,7 @@ class UserPreferences extends Model<IUserPreferencesModel> implements IUserPrefe
     marketingOptIn: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
-    },                              
+    },
     createdDate: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
@@ -56,7 +58,7 @@ class UserPreferences extends Model<IUserPreferencesModel> implements IUserPrefe
   },
   {
     sequelize: sequelizeDb,
-    tableName: 'userpreferences',
+    tableName: "userpreferences",
     timestamps: false,
   }
 );

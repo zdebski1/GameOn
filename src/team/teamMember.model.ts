@@ -1,7 +1,7 @@
-import ITeamMemberModel from './teamMember.interface';
-import sequelizeDb from '../config/sequelizeDb';
-import { DataTypes, Model } from 'sequelize';
-import User from '../user/user.model';
+import ITeamMemberModel from "./teamMember.interface";
+import sequelizeDb from "../config/sequelizeDb";
+import { DataTypes, Model } from "sequelize";
+import User from "../user/user.model";
 
 class TeamMember extends Model<ITeamMemberModel> implements ITeamMemberModel {
   public teamMemberId!: number;
@@ -15,8 +15,8 @@ class TeamMember extends Model<ITeamMemberModel> implements ITeamMemberModel {
 
   static associate(models: { User: typeof User }) {
     TeamMember.belongsTo(models.User, {
-      foreignKey: 'userFk',
-      as: 'user',
+      foreignKey: "userFk",
+      as: "user",
     });
   }
 }
@@ -59,7 +59,7 @@ TeamMember.init(
   },
   {
     sequelize: sequelizeDb,
-    tableName: 'teamMember',
+    tableName: "teamMember",
     timestamps: false,
   }
 );

@@ -1,16 +1,16 @@
-import Fastify from 'fastify';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import ajvErrors from 'ajv-errors';
-import availabilityRoutes from '../availability/availability.route';
-import teamRoutes from '../team/team.route';
-import teamMemberRoutes from '../team/teamMember.route';
-import { userRoutes } from '../user/user.route';
-import { authRoutes } from '../auth/auth.route';
+import Fastify from "fastify";
+import Ajv from "ajv";
+import addFormats from "ajv-formats";
+import ajvErrors from "ajv-errors";
+import availabilityRoutes from "../availability/availability.route";
+import teamRoutes from "../team/team.route";
+import teamMemberRoutes from "../team/teamMember.route";
+import { userRoutes } from "../user/user.route";
+import { authRoutes } from "../auth/auth.route";
 
-import cors from '@fastify/cors';
-import { userPreferencesRoutes } from '../user/user.preferences.route';
-import { userVerifyRoutes } from '../user/user.verify.route';
+import cors from "@fastify/cors";
+import { userPreferencesRoutes } from "../user/user.preferences.route";
+import { userVerifyRoutes } from "../user/user.verify.route";
 
 const fastify = Fastify({ logger: true });
 

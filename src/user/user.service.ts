@@ -1,48 +1,46 @@
-import { CreateUserDTO } from './user.dto';
-import bcrypt from 'bcrypt';
-import { HttpError } from '../utils/httpError';
-import { findUserByEmail, createUser } from './user.repository';
-import { v4 as uuidv4 } from 'uuid';
-import { generateRandomNumber, addMinutesToDateTime } from '../utils/helperFunctions';
-import { sendEmail } from '../utils/sendEmail';
-import { fromEmail } from '../utils/globalVariables';
-
+import { CreateUserDTO } from "./user.dto";
+import bcrypt from "bcrypt";
+import { HttpError } from "../utils/httpError";
+import { findUserByEmail, createUser } from "./user.repository";
+import { v4 as uuidv4 } from "uuid";
+import {
+  generateRandomNumber,
+  addMinutesToDateTime,
+} from "../utils/helperFunctions";
+import { sendEmail } from "../utils/sendEmail";
+import { fromEmail } from "../utils/globalVariables";
 
 export async function createUserService(createUserDto: CreateUserDTO) {
   try {
-    const {
-      password,
-      email,
-      phoneNumber,
-      firstName,
-      lastName,
-      createdBy
-    } = createUserDto;
+    const { password, email, phoneNumber, firstName, lastName, createdBy } =
+      createUserDto;
 
     const existingUser = await findUserByEmail(email);
 
     if (existingUser) {
-      throw new HttpError('Email already exists', 409);
+      throw new HttpError("Email already exists", 409);
     }
 
     const createdUuid: string = uuidv4();
     const combinedPassword = password + createdUuid;
     const hashedPassword = await bcrypt.hash(combinedPassword, 10);
 
-    const emailVerificationCode = (await generateRandomNumber(100000,900000)).toString()
-    const emailVerificationExpiresAt = addMinutesToDateTime(new Date(),15)
+    const emailVerificationCode = (
+      await generateRandomNumber(100000, 900000)
+    ).toString();
+    const emailVerificationExpiresAt = addMinutesToDateTime(new Date(), 15);
 
-    const emailSubject = 'GameOn Verification Code'
-    const emailBody = `Your verification code is: ${emailVerificationCode}`   
+    const emailSubject = "GameOn Verification Code";
+    const emailBody = `Your verification code is: ${emailVerificationCode}`;
 
-    const sendEmailToUserDto ={
+    const sendEmailToUserDto = {
       to: email,
       from: fromEmail,
       subject: emailSubject,
-      body: emailBody
+      body: emailBody,
     };
 
-    await sendEmail(sendEmailToUserDto)
+    await sendEmail(sendEmailToUserDto);
 
     const newUser = await createUser({
       password: hashedPassword,
@@ -57,7 +55,7 @@ export async function createUserService(createUserDto: CreateUserDTO) {
       profilePictureUrl: null,
       uuid: createdUuid,
       emailVerificationCode,
-      emailVerificationExpiresAt, 
+      emailVerificationExpiresAt,
       createdDateTime: new Date(),
       createdBy,
       updatedDateTime: null,
@@ -65,7 +63,7 @@ export async function createUserService(createUserDto: CreateUserDTO) {
     });
 
     return {
-      message: 'User created successfully',
+      message: "User created successfully",
       user: {
         userId: newUser.userId,
         email: newUser.email,
@@ -77,11 +75,11 @@ export async function createUserService(createUserDto: CreateUserDTO) {
         isEmailVerified: newUser.isEmailVerified,
         isPhoneNumberVerified: newUser.isPhoneNumberVerified,
         profilePictureUrl: newUser.profilePictureUrl,
-        createdDateTime: newUser.createdDateTime
+        createdDateTime: newUser.createdDateTime,
       },
     };
   } catch (error) {
-    console.error('Error creating user:', (error as Error).message);
+    console.error("Error creating user:", (error as Error).message);
     throw error;
   }
 }

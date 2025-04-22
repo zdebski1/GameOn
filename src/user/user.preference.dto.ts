@@ -3,4 +3,5 @@ export interface CreateUserPreferenceDto {
     allowSmsNotifications: boolean;
     allowEmailNotifications: boolean;
     marketingOptIn: boolean;
-}
+  }
+  

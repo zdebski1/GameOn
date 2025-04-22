@@ -26,7 +26,7 @@ export async function teamMembersByTeamId(
 
 export async function createTeamMemberService(teamMemberDto: TeamMemberDto) {
   try {
-    const { teamFk, userFk, createdBy } = teamMemberDto;
+    const { teamFk, userFk, userId } = teamMemberDto;
 
     const existingTeamMember = await getExistingTeamMember(teamMemberDto);
 
@@ -38,7 +38,7 @@ export async function createTeamMemberService(teamMemberDto: TeamMemberDto) {
       teamFk,
       userFk,
       isActive: true,
-      createdBy,
+      createdBy: userId,
       createdDateTime: new Date(),
       updatedDateTime: null,
       updatedBy: null,

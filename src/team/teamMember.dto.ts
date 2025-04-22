@@ -2,7 +2,7 @@ export interface TeamMemberDto {
   teamMemberId?: number;
   teamFk: number;
   userFk: number;
-  createdBy: number;
+  userId: number;
 }
 
 export interface TeamMemberWithUserDto {

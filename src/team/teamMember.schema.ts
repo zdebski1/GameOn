@@ -1,15 +1,13 @@
 export const createTeamMemberSchema = {
   body: {
     type: "object",
-    required: ["userFk", "createdBy"],
+    required: ["userFk"],
     properties: {
-      userFk: { type: "number" },
-      createdBy: { type: "number" },
+      userFk: { type: "number" }
     },
     errorMessage: {
       required: {
-        userFk: "userFk is required",
-        createdBy: "Email is required",
+        userFk: "userFk is required"
       },
     },
   },

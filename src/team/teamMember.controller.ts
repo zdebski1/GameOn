@@ -29,9 +29,11 @@ export async function createTeamMemberHandler(
   reply: FastifyReply
 ) {
   try {
+    const user = request.user as { userId: number };
     const teamMemberDto = {
       ...request.body,
-      teamFk: Number(request.params.teamId)
+      teamFk: Number(request.params.teamId),
+      userId: user.userId
     };
     return reply.code(201).send(await createTeamMemberService(teamMemberDto));
   } catch (error) {

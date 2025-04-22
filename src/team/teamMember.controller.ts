@@ -31,7 +31,7 @@ export async function createTeamMemberHandler(
   try {
     const teamMemberDto = {
       ...request.body,
-      teamFk: Number(request.params.teamId),
+      teamFk: Number(request.params.teamId)
     };
     return reply.code(201).send(await createTeamMemberService(teamMemberDto));
   } catch (error) {

@@ -12,6 +12,7 @@ import cors from "@fastify/cors";
 import { userPreferencesRoutes } from "../user/user.preferences.route";
 import { userVerifyRoutes } from "../user/user.verify.route";
 
+import fastifyJwt from '@fastify/jwt';
 const fastify = Fastify({ logger: true });
 
 fastify.register(cors, {

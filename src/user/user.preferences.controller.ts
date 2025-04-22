@@ -5,18 +5,18 @@ import { errorMessage } from '../utils/helperFunctions';
 import { listOfErrorCodes } from '../utils/globalVariables';
 
 export async function createUserPreferencesHandler(
-  request: FastifyRequest<{ 
-    Params: { userId: string }, 
-    Body: Omit<CreateUserPreferenceDto, 'userFk'> 
-    }>,
+  request: FastifyRequest<{
+    Params: { userId: string },
+    Body: Omit<CreateUserPreferenceDto, 'userFk'>
+  }>,
   reply: FastifyReply
 ) {
   try {
     const createUserPreferenceDto = {
-        ...request.body,
-        userFk: Number(request.params.userId),
-      };
-    return reply.code(201).send(await createUserPreferenceService (createUserPreferenceDto));
+      ...request.body,
+      userFk: Number(request.params.userId),
+    };
+    return reply.code(201).send(await createUserPreferenceService(createUserPreferenceDto));
   } catch (error) {
     console.error('Error creating user preference: ', error);
     await errorMessage(error, listOfErrorCodes, reply);
@@ -24,8 +24,8 @@ export async function createUserPreferencesHandler(
 }
 
 export async function getUserPreferencesByUserHandler(
-  request: FastifyRequest<{ 
-  Params: { userId: string } 
+  request: FastifyRequest<{
+    Params: { userId: string }
   }>,
   reply: FastifyReply
 ) {

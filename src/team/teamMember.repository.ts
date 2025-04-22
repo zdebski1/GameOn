@@ -6,8 +6,8 @@ export async function getTeamMembersByTeamId(teamId: string): Promise<TeamMember
   try {
     const teamMembers = await TeamMember.findAll({
       where:
-        [{teamFk: teamId}, {isActive: true}],
-     include: [
+        [{ teamFk: teamId }, { isActive: true }],
+      include: [
         {
           model: User,
           as: 'user',
@@ -31,11 +31,11 @@ export async function createTeamMember(teamMemberModel: Omit<ITeamMemberModel, '
   return TeamMember.create(teamMemberModel);
 }
 
-export async function getExistingTeamMember (teamMember: TeamMemberDto) {
+export async function getExistingTeamMember(teamMember: TeamMemberDto) {
   try {
     return TeamMember.findOne({
       where:
-        [{userFk: teamMember.userFk}, {teamFk: teamMember.teamFk}, {isActive: true}],
+        [{ userFk: teamMember.userFk }, { teamFk: teamMember.teamFk }, { isActive: true }],
     });
   } catch (error) {
     console.error('Error fetching Team Members:', error);

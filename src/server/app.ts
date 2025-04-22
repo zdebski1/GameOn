@@ -15,15 +15,15 @@ import { userVerifyRoutes } from '../user/user.verify.route';
 const fastify = Fastify({ logger: true });
 
 fastify.register(cors, {
-    origin: true,
-  });
+  origin: true,
+});
 
-  fastify.setValidatorCompiler(({ schema }) => {
-    const ajv = new Ajv({ allErrors: true });
-    addFormats(ajv);
-    ajvErrors(ajv);
-    return ajv.compile(schema);
-  });
+fastify.setValidatorCompiler(({ schema }) => {
+  const ajv = new Ajv({ allErrors: true });
+  addFormats(ajv);
+  ajvErrors(ajv);
+  return ajv.compile(schema);
+});
 
 fastify.register(availabilityRoutes);
 fastify.register(teamRoutes);

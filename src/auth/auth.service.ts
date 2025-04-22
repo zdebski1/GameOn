@@ -4,7 +4,7 @@ import { HttpError } from "../utils/httpError";
 import { LoginRequestDto } from './auth.dto';
 import { findUserByEmail } from '../user/user.repository';
 
-export async function loginService (loginRequestDto: LoginRequestDto) {
+export async function loginService(loginRequestDto: LoginRequestDto) {
 
   const user = await findUserByEmail(loginRequestDto.email);
 

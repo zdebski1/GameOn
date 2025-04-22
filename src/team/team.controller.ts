@@ -5,12 +5,10 @@ import { getTeamsService } from './team.service';
 import { listOfErrorCodes } from '../utils/globalVariables';
 import { errorMessage } from '../utils/helperFunctions';
 
-
-
-export async function createTeamHandler (
-  request: FastifyRequest<{ 
+export async function createTeamHandler(
+  request: FastifyRequest<{
     Body: CreateTeamDto,
-    Params: { userId: string }  
+    Params: { userId: string }
   }>,
   reply: FastifyReply
 ) {
@@ -21,15 +19,14 @@ export async function createTeamHandler (
     };
     return reply.code(201).send(await createTeamService(createTeamDto));
   } catch (error) {
-    console.error('Error creating team: ', error); 
+    console.error('Error creating team: ', error);
     await errorMessage(error, listOfErrorCodes, reply);
   }
 }
 
-
 export async function getAllTeamsHandler(
   request: FastifyRequest<{
-    Params: { userId: string } 
+    Params: { userId: string }
   }>,
   reply: FastifyReply
 ) {

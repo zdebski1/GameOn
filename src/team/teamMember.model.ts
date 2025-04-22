@@ -1,25 +1,25 @@
 import ITeamMemberModel from './teamMember.interface';
-import sequelizeDb from '../config/sequelizeDb';  
+import sequelizeDb from '../config/sequelizeDb';
 import { DataTypes, Model } from 'sequelize';
 import User from '../user/user.model';
 
 class TeamMember extends Model<ITeamMemberModel> implements ITeamMemberModel {
-    public teamMemberId!: number;
-    public userFk!: number;
-    public isActive!: boolean;
-    public teamFk!: number;
-    public createdDateTime!: Date;
-    public createdBy!: number;
-    public updatedDateTime!: Date;
-    public updatedBy! : number;
+  public teamMemberId!: number;
+  public userFk!: number;
+  public isActive!: boolean;
+  public teamFk!: number;
+  public createdDateTime!: Date;
+  public createdBy!: number;
+  public updatedDateTime!: Date;
+  public updatedBy!: number;
 
-    static associate(models: { User: typeof User }) {
-      TeamMember.belongsTo(models.User, {
-        foreignKey: 'userFk',
-        as: 'user',
-      });
-    }
+  static associate(models: { User: typeof User }) {
+    TeamMember.belongsTo(models.User, {
+      foreignKey: 'userFk',
+      as: 'user',
+    });
   }
+}
 
 TeamMember.init(
   {
@@ -50,7 +50,7 @@ TeamMember.init(
     },
     updatedDateTime: {
       type: DataTypes.DATE,
-      allowNull: true,      
+      allowNull: true,
     },
     updatedBy: {
       type: DataTypes.INTEGER,

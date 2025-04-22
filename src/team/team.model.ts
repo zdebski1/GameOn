@@ -1,5 +1,5 @@
 import ITeamModel from './team.interface';
-import sequelizeDb from '../config/sequelizeDb';  
+import sequelizeDb from '../config/sequelizeDb';
 import { DataTypes, Model } from 'sequelize';
 
 class Team extends Model<ITeamModel> implements ITeamModel {
@@ -31,7 +31,7 @@ Team.init(
     isOwner: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-    },    
+    },
     createdDateTime: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,

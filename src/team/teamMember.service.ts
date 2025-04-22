@@ -17,32 +17,32 @@ export async function teamMembersByTeamId(teamId: string): Promise<TeamMemberWit
 
   } catch (error) {
     console.error('Error fetching team members: ', error);
-    throw error; 
+    throw error;
   }
 }
 
-export async function createTeamMemberService (teamMemberDto: TeamMemberDto) {
+export async function createTeamMemberService(teamMemberDto: TeamMemberDto) {
   try {
     const {
       teamFk,
       userFk,
       createdBy,
     } = teamMemberDto;
-    
+
     const existingTeamMember = await (getExistingTeamMember(teamMemberDto))
-    
-    if (existingTeamMember){ 
-        throw new HttpError("Team Member already Exists", 409);
+
+    if (existingTeamMember) {
+      throw new HttpError("Team Member already Exists", 409);
     }
 
     const newTeamMember = await createTeamMember({
-        teamFk,
-        userFk,
-        isActive: true,
-        createdBy,
-        createdDateTime: new Date(),
-        updatedDateTime: null,
-        updatedBy: null
+      teamFk,
+      userFk,
+      isActive: true,
+      createdBy,
+      createdDateTime: new Date(),
+      updatedDateTime: null,
+      updatedBy: null
     });
 
     return {

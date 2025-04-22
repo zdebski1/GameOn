@@ -3,12 +3,12 @@ import { createTeam, getAllTeamsForUser } from './team.repository';
 import { HttpError } from '../utils/httpError';
 import { getTeamsOwnedByUser } from './team.repository';
 
-export async function createTeamService (createTeamDto: CreateTeamDto) {
+export async function createTeamService(createTeamDto: CreateTeamDto) {
   try {
     const {
-        teamName,
-        isOwner,
-        userId
+      teamName,
+      isOwner,
+      userId
     } = createTeamDto;
 
     if (await getTeamsOwnedByUser(createTeamDto)) {
@@ -16,13 +16,13 @@ export async function createTeamService (createTeamDto: CreateTeamDto) {
     }
 
     const newTeam = await createTeam({
-        teamName,
-        isActive: true,
-        isOwner,
-        createdDateTime: new Date(),
-        createdBy: userId,
-        updatedDateTime: null,
-        updatedBy: null
+      teamName,
+      isActive: true,
+      isOwner,
+      createdDateTime: new Date(),
+      createdBy: userId,
+      updatedDateTime: null,
+      updatedBy: null
     });
 
     return {

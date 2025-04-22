@@ -1,35 +1,35 @@
 import { IUserModel } from './user.interface';
-import sequelizeDb from '../config/sequelizeDb';  
+import sequelizeDb from '../config/sequelizeDb';
 import { DataTypes, Model } from 'sequelize';
 import TeamMember from '../team/teamMember.model';
 
 class User extends Model<IUserModel> implements IUserModel {
-    public userId!: number;
-    public password!: string;
-    public email!: string;
-    public phoneNumber!: string;
-    public firstName!: string;
-    public lastName!: string;
-    public isActive!: boolean;
-    public isAdmin!: boolean;
-    public isEmailVerified!: boolean;
-    public isPhoneNumberVerified!: boolean;        
-    public profilePictureUrl!: string;    
-    public uuid!: string;
-    public emailVerificationCode!: string;
-    public emailVerificationExpiresAt!: Date;
-    public createdDateTime!: Date;
-    public createdBy!: number;
-    public updatedDateTime!: Date;
-    public updatedBy!: number;
+  public userId!: number;
+  public password!: string;
+  public email!: string;
+  public phoneNumber!: string;
+  public firstName!: string;
+  public lastName!: string;
+  public isActive!: boolean;
+  public isAdmin!: boolean;
+  public isEmailVerified!: boolean;
+  public isPhoneNumberVerified!: boolean;
+  public profilePictureUrl!: string;
+  public uuid!: string;
+  public emailVerificationCode!: string;
+  public emailVerificationExpiresAt!: Date;
+  public createdDateTime!: Date;
+  public createdBy!: number;
+  public updatedDateTime!: Date;
+  public updatedBy!: number;
 
-    static associate(models: { TeamMember: typeof TeamMember }) {
-      User.hasMany(models.TeamMember, {
-        foreignKey: 'userFk',
-        as: 'teamMembers',
-      });
-    }
+  static associate(models: { TeamMember: typeof TeamMember }) {
+    User.hasMany(models.TeamMember, {
+      foreignKey: 'userFk',
+      as: 'teamMembers',
+    });
   }
+}
 
 User.init(
   {
@@ -49,7 +49,7 @@ User.init(
     phoneNumber: {
       type: DataTypes.STRING,
       allowNull: true,
-    },    
+    },
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -68,14 +68,14 @@ User.init(
     },
     isEmailVerified: {
       type: DataTypes.BOOLEAN,
-      allowNull: false, 
+      allowNull: false,
       defaultValue: false
-    },  
+    },
     isPhoneNumberVerified: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false      
-    },  
+      defaultValue: false
+    },
     profilePictureUrl: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -91,7 +91,7 @@ User.init(
     emailVerificationExpiresAt: {
       type: DataTypes.DATE,
       allowNull: false,
-    },                                          
+    },
     createdDateTime: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,

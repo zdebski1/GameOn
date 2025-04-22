@@ -12,13 +12,7 @@ class UserPreferences extends Model<IUserPreferencesModel> implements IUserPrefe
     public createdBy!: number;
     public updatedDateTime!: Date;
     public updatedBy!: number;
-
-    // static associate(models: { TeamMember: typeof TeamMember }) {
-    //     UserPreferences.hasMany(models.TeamMember, {
-    //     foreignKey: 'userFk',
-    //     as: 'teamMembers',
-    //   });
-    // }
+ 
   }
   UserPreferences.init(
   {

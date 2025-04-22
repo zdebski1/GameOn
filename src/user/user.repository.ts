@@ -14,7 +14,7 @@ export async function findUserByEmail(email: string) {
 
 export async function findUserByUserId(userId: number) {
   return User.findOne({
-    where: {userId: userId},
+    where: { userId: userId },
   });
 }
 

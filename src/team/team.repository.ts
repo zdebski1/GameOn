@@ -20,12 +20,12 @@ export async function createTeam(teamModel: Omit<ITeamModel, 'teamId'>) {
     return Team.create(teamModel);
   }
 
-export async function getActiveTeamsByUser(teamDto: TeamDto) {
+export async function getTeamsOwnedByUser(teamDto: TeamDto) {
     return Team.findOne({
       where: {
         [Op.and]: [
           Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('teamName')), teamDto.teamName.toLowerCase()),
-          { createdBy: teamDto.createdBy }
+          { createdBy: teamDto.userId }
         ],
       },
     });

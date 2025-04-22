@@ -1,19 +1,17 @@
-import { TeamDto } from './team.dto';
-import { getAllTeams, createTeam, getAllTeamsForUser } from './team.repository';
+import { TeamDto, CreateTeamDto } from './team.dto';
+import { createTeam, getAllTeamsForUser } from './team.repository';
 import { HttpError } from '../utils/httpError';
-import { getActiveTeamsByUser } from './team.repository';
+import { getTeamsOwnedByUser } from './team.repository';
 
-export async function createTeamService (teamDto: TeamDto) {
+export async function createTeamService (createTeamDto: CreateTeamDto) {
   try {
     const {
         teamName,
         isOwner,
-        createdBy
-    } = teamDto;
+        userId
+    } = createTeamDto;
 
-    const existingTeam = await getActiveTeamsByUser(teamDto);
-
-    if (existingTeam) {
+    if (await getTeamsOwnedByUser(createTeamDto)) {
       throw new HttpError('Team already exists', 409);
     }
 
@@ -22,7 +20,7 @@ export async function createTeamService (teamDto: TeamDto) {
         isActive: true,
         isOwner,
         createdDateTime: new Date(),
-        createdBy,
+        createdBy: userId,
         updatedDateTime: null,
         updatedBy: null
     });
@@ -30,7 +28,8 @@ export async function createTeamService (teamDto: TeamDto) {
     return {
       message: 'Team created successfully',
       team: {
-        teamName: newTeam.teamName
+        teamName: newTeam.teamName,
+        isOwner: newTeam.isOwner
       },
     };
 
@@ -40,17 +39,12 @@ export async function createTeamService (teamDto: TeamDto) {
   }
 }
 
-export async function getTeamsService(userId?: number): Promise<TeamDto[]> {
+export async function getTeamsService(userId: number): Promise<TeamDto[]> {
   try {
-    const teams = userId
-      ? await getAllTeamsForUser(userId)
-      : await getAllTeams();
-
-    return (teams ?? []).map((team: TeamDto) => ({
+    return (await getAllTeamsForUser(userId) ?? []).map((team: TeamDto) => ({
       teamId: team.teamId,
       teamName: team.teamName,
-      isOwner: team.isOwner,
-      createdBy: team.createdBy,
+      isOwner: team.isOwner
     }));
   } catch (error) {
     console.error('Error fetching teams: ', error);

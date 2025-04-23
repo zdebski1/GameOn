@@ -19,7 +19,6 @@ class User extends Model<IUserModel> implements IUserModel {
   public emailVerificationCode!: string;
   public emailVerificationExpiresAt!: Date;
   public createdDateTime!: Date;
-  public createdBy!: number;
   public updatedDateTime!: Date;
   public updatedBy!: number;
 
@@ -95,10 +94,6 @@ User.init(
     createdDateTime: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
-    },
-    createdBy: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
     },
     updatedDateTime: {
       type: DataTypes.DATE,

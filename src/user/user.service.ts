@@ -12,7 +12,7 @@ import { fromEmail } from "../utils/globalVariables";
 
 export async function createUserService(createUserDto: CreateUserDTO) {
   try {
-    const { password, email, phoneNumber, firstName, lastName, createdBy } =
+    const { password, email, phoneNumber, firstName, lastName } =
       createUserDto;
 
     const existingUser = await findUserByEmail(email);
@@ -57,7 +57,6 @@ export async function createUserService(createUserDto: CreateUserDTO) {
       emailVerificationCode,
       emailVerificationExpiresAt,
       createdDateTime: new Date(),
-      createdBy,
       updatedDateTime: null,
       updatedBy: null,
     });

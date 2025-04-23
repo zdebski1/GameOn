@@ -4,7 +4,6 @@ export interface CreateUserDTO {
   phoneNumber: string;
   firstName: string;
   lastName: string;
-  createdBy: number;
 }
 
 export interface SendEmailToUserDto {

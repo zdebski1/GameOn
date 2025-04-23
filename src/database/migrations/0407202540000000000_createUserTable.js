@@ -15,7 +15,6 @@ exports.up = function(knex) {
       table.string('emailVerificationCode');
       table.timestamp('emailVerificationExpiresAt');
       table.timestamp('createdDateTime').defaultTo(knex.fn.now());
-      table.integer('createdBy');
       table.timestamp('updatedDateTime');
       table.integer('updatedBy');
     });

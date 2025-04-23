@@ -1,7 +1,7 @@
 export const createUserSchema = {
   body: {
     type: "object",
-    required: ["password", "email", "firstName", "lastName", "createdBy"],
+    required: ["password", "email", "firstName", "lastName"],
     properties: {
       password: {
         type: "string",
@@ -18,7 +18,6 @@ export const createUserSchema = {
       },
       firstName: { type: "string", minLength: 1 },
       lastName: { type: "string", minLength: 1 },
-      createdBy: { type: "number" },
     },
     errorMessage: {
       required: {
@@ -26,7 +25,6 @@ export const createUserSchema = {
         email: "Email is required",
         firstName: "First name is required",
         lastName: "Last name is required",
-        createdBy: "createdBy is required",
       },
     },
   },

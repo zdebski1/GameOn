@@ -2,10 +2,10 @@ import { FastifyRequest, FastifyReply } from "fastify";
 import {
   createUserPreferenceService,
   getPreferencesByUserIdService,
-} from "./preferences.service";
+} from "./preference.service";
 import { errorMessage } from "../utils/helperFunctions";
 import { listOfErrorCodes } from "../utils/globalVariables";
-import { CreatePreferenceRoute } from "./preferences.type";
+import { CreatePreferenceRoute } from "./preference.type";
 
 export async function createPreferencesHandler(
   request: FastifyRequest<CreatePreferenceRoute>,

@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify";
-import { createPreferencesSchema } from "./preferences.schema";
+import { createPreferencesSchema } from "./preference.schema";
 import {
   createPreferencesHandler,
   getPreferencesByUserHandler,
-} from "./preferences.controller";
+} from "./preference.controller";
 import { authorizeRole } from "../middleware/authorizeRole";
-import { CreatePreferenceRoute } from "./preferences.type";
+import { CreatePreferenceRoute } from "./preference.type";
 
 export async function preferencesRoutes(fastify: FastifyInstance) {
   fastify.post<CreatePreferenceRoute>(

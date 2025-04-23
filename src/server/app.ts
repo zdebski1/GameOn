@@ -9,7 +9,7 @@ import { userRoutes } from "../user/user.route";
 import { authRoutes } from "../auth/auth.route";
 
 import cors from "@fastify/cors";
-import { preferencesRoutes } from "../preference/preferences.route";
+import { preferencesRoutes } from "../preference/preference.route";
 import { verificationRoutes } from "../verification/verification.route";
 import fastifyJwt from '@fastify/jwt';
 

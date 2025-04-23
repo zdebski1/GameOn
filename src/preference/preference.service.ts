@@ -1,7 +1,7 @@
 import {
     createPreference,
     getPreferencesByUser,
-  } from "./preferences.repository";
+  } from "./preference.repository";
   import { CreatePreferenceDto } from "./preference.dto";
   import { HttpError } from "../utils/httpError";
   

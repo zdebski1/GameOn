@@ -1,5 +1,5 @@
-import { IUserPreferencesModel } from "./user.preferences.interface";
-import UserPreferences from "./user.preferences.model";
+import { IUserPreferencesModel } from "./preferences.interface";
+import UserPreferences from "./preferences.model";
 
 export async function createUserPreference(
   userPreferences: Omit<IUserPreferencesModel, "userPreferenceId">

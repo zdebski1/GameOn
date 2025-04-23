@@ -9,7 +9,7 @@ import { userRoutes } from "../user/user.route";
 import { authRoutes } from "../auth/auth.route";
 
 import cors from "@fastify/cors";
-import { userPreferencesRoutes } from "../user/user.preferences.route";
+import { preferencesRoutes } from "../preference/preferences.route";
 import { verificationRoutes } from "../verification/verification.route";
 import fastifyJwt from '@fastify/jwt';
 
@@ -36,7 +36,7 @@ fastify.register(teamRoutes);
 fastify.register(teamMemberRoutes);
 fastify.register(userRoutes);
 fastify.register(authRoutes);
-fastify.register(userPreferencesRoutes);
+fastify.register(preferencesRoutes);
 fastify.register(verificationRoutes);
 
 export default fastify;

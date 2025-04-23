@@ -1,8 +1,8 @@
 import {
     createUserPreference,
     getUserPreferencesByUser,
-  } from "./user.preferences.repository";
-  import { CreateUserPreferenceDto } from "./user.preference.dto";
+  } from "./preferences.repository";
+  import { CreateUserPreferenceDto } from "./preference.dto";
   import { HttpError } from "../utils/httpError";
   
   export async function createUserPreferenceService(

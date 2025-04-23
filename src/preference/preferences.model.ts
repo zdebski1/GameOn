@@ -1,6 +1,6 @@
 import sequelizeDb from "../config/sequelizeDb";
 import { DataTypes, Model } from "sequelize";
-import { IUserPreferencesModel } from "./user.preferences.interface";
+import { IUserPreferencesModel } from "./preferences.interface";
 
 class UserPreferences
   extends Model<IUserPreferencesModel>

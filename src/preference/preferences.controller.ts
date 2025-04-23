@@ -1,12 +1,12 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { CreateUserPreferenceDto } from "./user.preference.dto";
+import { CreateUserPreferenceDto } from "./preference.dto";
 import {
   createUserPreferenceService,
   getUserPreferencesByUserIdService,
-} from "./user.preferences.service";
+} from "./preferences.service";
 import { errorMessage } from "../utils/helperFunctions";
 import { listOfErrorCodes } from "../utils/globalVariables";
-import { CreateUserPreferenceRoute } from "./user.preferences.type";
+import { CreateUserPreferenceRoute } from "./preferences.type";
 
 export async function createUserPreferencesHandler(
   request: FastifyRequest<CreateUserPreferenceRoute>,

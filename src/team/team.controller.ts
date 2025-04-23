@@ -1,23 +1,21 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { CreateTeamDto } from "./team.dto";
 import { createTeamService } from "./team.service";
 import { getTeamsService } from "./team.service";
 import { listOfErrorCodes } from "../utils/globalVariables";
 import { errorMessage } from "../utils/helperFunctions";
+import { CreateTeamRoute } from "./team.type";
 
 export async function createTeamHandler(
-  request: FastifyRequest<{
-    Body: CreateTeamDto;
-  }>,
+  request: FastifyRequest<CreateTeamRoute>,
   reply: FastifyReply
 ) {
   try {
     const user = request.user as { userId: number };
-    const createTeamDto = {
+    const createTeamRoute = {
       ...request.body,
       userId: user.userId,
     };
-    return reply.code(201).send(await createTeamService(createTeamDto));
+    return reply.code(201).send(await createTeamService(createTeamRoute));
   } catch (error) {
     console.error("Error creating team: ", error);
     await errorMessage(error, listOfErrorCodes, reply);

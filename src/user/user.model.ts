@@ -1,7 +1,7 @@
 import { IUserModel } from "./user.interface";
 import sequelizeDb from "../config/sequelizeDb";
 import { DataTypes, Model } from "sequelize";
-import TeamMember from "../team/teamMember.model";
+import { TeamMember } from "../models";
 
 class User extends Model<IUserModel> implements IUserModel {
   public userId!: number;

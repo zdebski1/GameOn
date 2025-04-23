@@ -3,7 +3,6 @@ import {
   createTeamMemberService,
   teamMembersByTeamId,
 } from "./teamMember.service";
-import { TeamMemberDto } from "./teamMember.dto";
 import { listOfErrorCodes } from "../utils/globalVariables";
 import { errorMessage } from "../utils/helperFunctions";
 import { CreateTeamMemberRoute, GetAllTeamMembersRoute } from "./teamMember.type";

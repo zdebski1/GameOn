@@ -4,7 +4,7 @@ import addFormats from "ajv-formats";
 import ajvErrors from "ajv-errors";
 import availabilityRoutes from "../availability/availability.route";
 import teamRoutes from "../team/team.route";
-import teamMemberRoutes from "../team/teamMember.route";
+import teamMemberRoutes from "../teamMember/teamMember.route";
 import { userRoutes } from "../user/user.route";
 import { authRoutes } from "../auth/auth.route";
 

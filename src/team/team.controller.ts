@@ -5,7 +5,7 @@ import { listOfErrorCodes } from "../utils/globalVariables";
 import { errorMessage } from "../utils/helperFunctions";
 import { CreateTeamRoute } from "./team.type";
 
-export async function createTeamHandler(
+export async function CreateTeamsController (
   request: FastifyRequest<CreateTeamRoute>,
   reply: FastifyReply
 ) {
@@ -22,7 +22,7 @@ export async function createTeamHandler(
   }
 }
 
-export async function getAllTeamsHandler(
+export async function GetTeamsController(
   request: FastifyRequest,
   reply: FastifyReply
 ) {

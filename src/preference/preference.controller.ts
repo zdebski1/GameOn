@@ -7,7 +7,7 @@ import { errorMessage } from "../utils/helperFunctions";
 import { listOfErrorCodes } from "../utils/globalVariables";
 import { CreatePreferenceRoute } from "./preference.type";
 
-export async function createPreferencesHandler(
+export async function CreatePreferencesController(
   request: FastifyRequest<CreatePreferenceRoute>,
   reply: FastifyReply
 ) {
@@ -26,7 +26,7 @@ export async function createPreferencesHandler(
   }
 }
 
-export async function getPreferencesByUserHandler(
+export async function GetPreferencesByUserController(
   request: FastifyRequest,
   reply: FastifyReply
 ) {

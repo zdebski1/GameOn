@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import {
-  createUserEmailVerificationHandler,
-  updateEmailVerificationHandler,
+  CreateUserEmailVerificationsController,
+  UpdateEmailVerificationsController,
 } from "./verification.controller";
 import {
   createEmailVerificationSchema,
@@ -18,13 +18,13 @@ export async function verificationRoutes(fastify: FastifyInstance) {
     {
       schema: updateEmailVerificationSchema,
     },
-    updateEmailVerificationHandler
+    UpdateEmailVerificationsController
   );
   fastify.post<CreateEmailVerifyRoute>(
     "/verifications",
     {
       schema: createEmailVerificationSchema,
     },
-    createUserEmailVerificationHandler
+    CreateUserEmailVerificationsController
   );
 }

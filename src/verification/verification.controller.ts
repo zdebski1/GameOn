@@ -10,7 +10,7 @@ import {
   UpdateVerifyRoute,
 } from "./verification.type";
 
-export async function updateEmailVerificationHandler(
+export async function UpdateEmailVerificationsController(
   request: FastifyRequest<UpdateVerifyRoute>,
   reply: FastifyReply
 ) {
@@ -30,7 +30,7 @@ export async function updateEmailVerificationHandler(
   }
 }
 
-export async function createUserEmailVerificationHandler(
+export async function CreateUserEmailVerificationsController(
   request: FastifyRequest<CreateEmailVerifyRoute>,
   reply: FastifyReply
 ) {

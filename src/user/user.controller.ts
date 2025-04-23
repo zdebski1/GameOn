@@ -4,7 +4,7 @@ import { createUserService } from "./user.service";
 import { errorMessage } from "../utils/helperFunctions";
 import { listOfErrorCodes } from "../utils/globalVariables";
 
-export async function createUserHandler(
+export async function CreateUsersController(
   request: FastifyRequest<{ Body: CreateUserDTO }>,
   reply: FastifyReply
 ) {

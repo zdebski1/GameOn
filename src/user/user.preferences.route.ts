@@ -4,21 +4,18 @@ import {
   createUserPreferencesHandler,
   getUserPreferencesByUserHandler,
 } from "./user.preferences.controller";
+import { authorizeRole } from "../middleware/authorizeRole";
+import { CreateUserPreferenceRoute } from "./user.preferences.type";
 
 export async function userPreferencesRoutes(fastify: FastifyInstance) {
-  fastify.register(async (userScope) => {
-    userScope.addHook("preHandler", async (request) => {
-      await request.jwtVerify();
-    });
-
-    userScope.post(
+  fastify.post<CreateUserPreferenceRoute>(
       "/users/preferences",
-      { schema: createUserPreferencesSchema },
+      { preHandler: authorizeRole(['user','admin']), schema: createUserPreferencesSchema },
       createUserPreferencesHandler
     );
-    userScope.get(
+    fastify.get(
       "/users/preferences",
+      {preHandler: authorizeRole(['user','admin'])},
       getUserPreferencesByUserHandler
     );
-  });
-}
+  }

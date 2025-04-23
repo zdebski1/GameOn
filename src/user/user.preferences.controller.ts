@@ -6,11 +6,10 @@ import {
 } from "./user.preferences.service";
 import { errorMessage } from "../utils/helperFunctions";
 import { listOfErrorCodes } from "../utils/globalVariables";
+import { CreateUserPreferenceRoute } from "./user.preferences.type";
 
 export async function createUserPreferencesHandler(
-  request: FastifyRequest<{
-    Body: Omit<CreateUserPreferenceDto, "userFk">;
-  }>,
+  request: FastifyRequest<CreateUserPreferenceRoute>,
   reply: FastifyReply
 ) {
   try {

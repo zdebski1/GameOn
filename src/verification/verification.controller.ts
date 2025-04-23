@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import {
   updateEmailVerification,
   createEmailVerification,
-} from "./verification..service";
+} from "./verification.service";
 import { errorMessage } from "../utils/helperFunctions";
 import { listOfErrorCodes } from "../utils/globalVariables";
 import {

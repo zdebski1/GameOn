@@ -6,7 +6,7 @@ import availabilityRoutes from "../availability/availability.route";
 import teamRoutes from "../team/team.route";
 import teamMemberRoutes from "../teamMember/teamMember.route";
 import { userRoutes } from "../user/user.route";
-import { authRoutes } from "../auth/auth.route";
+import { authRoutes } from "../authenticate/authenticate.route";
 
 import cors from "@fastify/cors";
 import { preferencesRoutes } from "../preference/preference.route";

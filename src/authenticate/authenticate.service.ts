@@ -1,11 +1,11 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { HttpError } from "../utils/httpError";
-import { LoginRequestDto } from "./auth.dto";
+import { AuthenticateRequestDto } from "./authenticate.dto";
 import { findUserByEmail } from "../user/user.repository";
 
-export async function loginService(loginRequestDto: LoginRequestDto) {
-  const user = await findUserByEmail(loginRequestDto.email);
+export async function AuthenticateService(authenticateRequestDto: AuthenticateRequestDto) {
+  const user = await findUserByEmail(authenticateRequestDto.email);
 
   if (!user) {
     throw new HttpError("Username or password is incorrect", 401);
@@ -15,7 +15,7 @@ export async function loginService(loginRequestDto: LoginRequestDto) {
     throw new HttpError("User not verified", 403);
   }
 
-  const combinedPassword = loginRequestDto.password + user.uuid;
+  const combinedPassword = authenticateRequestDto.password + user.uuid;
   const isPasswordValid = await bcrypt.compare(combinedPassword, user.password);
 
   if (!isPasswordValid) {

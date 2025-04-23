@@ -1,4 +1,4 @@
-export const loginSchema = {
+export const AuthenticateSchema = {
   body: {
     type: "object",
     required: ["email", "password"],

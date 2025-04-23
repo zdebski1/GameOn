@@ -1,12 +1,12 @@
 import {
-    createUserPreference,
-    getUserPreferencesByUser,
+    createPreference,
+    getPreferencesByUser,
   } from "./preferences.repository";
-  import { CreateUserPreferenceDto } from "./preference.dto";
+  import { CreatePreferenceDto } from "./preference.dto";
   import { HttpError } from "../utils/httpError";
   
   export async function createUserPreferenceService(
-    createUserPreferenceDto: CreateUserPreferenceDto
+    createUserPreferenceDto: CreatePreferenceDto
   ) {
     try {
       const {
@@ -16,13 +16,13 @@ import {
         marketingOptIn,
       } = createUserPreferenceDto;
   
-      const userPreferencesExist = await getUserPreferencesByUser(userFk);
+      const userPreferencesExist = await getPreferencesByUser(userFk);
   
       if (userPreferencesExist) {
         throw new HttpError("User Preferences already exist", 409);
       }
   
-      const createUserPreferences = await createUserPreference({
+      const createPreferences = await createPreference({
         userFk,
         allowSmsNotifications,
         allowEmailNotifications,
@@ -37,10 +37,10 @@ import {
         message: "User Preferences Created",
   
         UserPreferences: {
-          userFk: createUserPreferences.userFk,
-          allowSmsNotifications: createUserPreferences.allowSmsNotifications,
-          allowEmailNotifications: createUserPreferences.allowEmailNotifications,
-          marketingOptIn: createUserPreferences.marketingOptIn,
+          userFk: createPreferences.userFk,
+          allowSmsNotifications: createPreferences.allowSmsNotifications,
+          allowEmailNotifications: createPreferences.allowEmailNotifications,
+          marketingOptIn: createPreferences.marketingOptIn,
         },
       };
     } catch (error) {
@@ -49,9 +49,9 @@ import {
     }
   }
   
-  export async function getUserPreferencesByUserIdService(userFk: number) {
+  export async function getPreferencesByUserIdService(userFk: number) {
     try {
-      const userPreference = await getUserPreferencesByUser(userFk);
+      const userPreference = await getPreferencesByUser(userFk);
       return {
         userFk: userPreference?.userFk,
         allowEmailNotifications: userPreference?.allowEmailNotifications,
@@ -63,4 +63,3 @@ import {
       throw error;
     }
   }
-  

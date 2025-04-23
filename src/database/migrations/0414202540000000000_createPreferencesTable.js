@@ -1,5 +1,5 @@
 exports.up = function(knex) {
-  return knex.schema.createTable('userpreferences', function(table) {
+  return knex.schema.createTable('preferences', function(table) {
     table.increments('userPreferenceId').primary();
     table.integer('userFk').unsigned().notNullable();
     table.boolean('allowSmsNotifications');
@@ -34,5 +34,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable('userpreferences');
+  return knex.schema.dropTable('preferences');
 };

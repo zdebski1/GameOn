@@ -1,10 +1,10 @@
 import sequelizeDb from "../config/sequelizeDb";
 import { DataTypes, Model } from "sequelize";
-import { IUserPreferencesModel } from "./preferences.interface";
+import { IPreferencesModel } from "./preferences.interface";
 
 class UserPreferences
-  extends Model<IUserPreferencesModel>
-  implements IUserPreferencesModel
+  extends Model<IPreferencesModel>
+  implements IPreferencesModel
 {
   public userPreferenceId!: number;
   public userFk!: number;
@@ -58,7 +58,7 @@ UserPreferences.init(
   },
   {
     sequelize: sequelizeDb,
-    tableName: "userpreferences",
+    tableName: "preferences",
     timestamps: false,
   }
 );

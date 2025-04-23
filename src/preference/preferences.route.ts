@@ -1,21 +1,21 @@
 import { FastifyInstance } from "fastify";
-import { createUserPreferencesSchema } from "./preferences.schema";
+import { createPreferencesSchema } from "./preferences.schema";
 import {
-  createUserPreferencesHandler,
-  getUserPreferencesByUserHandler,
+  createPreferencesHandler,
+  getPreferencesByUserHandler,
 } from "./preferences.controller";
 import { authorizeRole } from "../middleware/authorizeRole";
-import { CreateUserPreferenceRoute } from "./preferences.type";
+import { CreatePreferenceRoute } from "./preferences.type";
 
 export async function preferencesRoutes(fastify: FastifyInstance) {
-  fastify.post<CreateUserPreferenceRoute>(
+  fastify.post<CreatePreferenceRoute>(
       "/preferences",
-      { preHandler: authorizeRole(['user','admin']), schema: createUserPreferencesSchema },
-      createUserPreferencesHandler
+      { preHandler: authorizeRole(['user','admin']), schema: createPreferencesSchema },
+      createPreferencesHandler
     );
     fastify.get(
       "/preferences",
       {preHandler: authorizeRole(['user','admin'])},
-      getUserPreferencesByUserHandler
+      getPreferencesByUserHandler
     );
   }

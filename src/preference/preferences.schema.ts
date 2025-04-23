@@ -1,4 +1,4 @@
-export const createUserPreferencesSchema = {
+export const createPreferencesSchema = {
   body: {
     type: "object",
     required: [

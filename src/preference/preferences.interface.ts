@@ -1,4 +1,4 @@
-export interface IUserPreferencesModel {
+export interface IPreferencesModel {
   userPreferenceId?: number;
   userFk: number;
   allowSmsNotifications: boolean;

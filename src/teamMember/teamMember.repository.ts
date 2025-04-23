@@ -1,5 +1,5 @@
 import { User, TeamMember } from "../models";
-import { TeamMemberDto, TeamMemberWithUserDto } from "./teamMember.dto";
+import { GetTeamMemberDto, TeamMemberWithUserDto } from "./teamMember.dto";
 import ITeamMemberModel from "./teamMember.interface";
 
 export async function getTeamMembersByTeamId(
@@ -34,12 +34,12 @@ export async function createTeamMember(
   return TeamMember.create(teamMemberModel);
 }
 
-export async function getExistingTeamMember(teamMember: TeamMemberDto) {
+export async function getExistingTeamMember(getTeamMemberDto: GetTeamMemberDto) {
   try {
     return TeamMember.findOne({
       where: [
-        { userFk: teamMember.userFk },
-        { teamFk: teamMember.teamFk },
+        { userFk: getTeamMemberDto.userFk },
+        { teamFk: getTeamMemberDto.teamFk },
         { isActive: true },
       ],
     });

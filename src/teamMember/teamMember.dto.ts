@@ -1,4 +1,11 @@
-export interface TeamMemberDto {
+export interface CreateTeamMemberDto {
+  teamMemberId?: number;
+  teamFk: number;
+  userFk: number;
+  userId: number;
+}
+
+export interface GetTeamMemberDto {
   teamMemberId?: number;
   teamFk: number;
   userFk: number;

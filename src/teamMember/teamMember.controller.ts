@@ -5,10 +5,10 @@ import {
 } from "./teamMember.service";
 import { listOfErrorCodes } from "../utils/globalVariables";
 import { errorMessage } from "../utils/helperFunctions";
-import { CreateTeamMemberRoute, GetAllTeamMembersRoute } from "./teamMember.type";
+import { CreateTeamMemberRoute, GetTeamMembersRoute } from "./teamMember.type";
 
-export async function getAllTeamMembersHandler(
-  request: FastifyRequest<GetAllTeamMembersRoute>,
+export async function getTeamMembersHandler(
+  request: FastifyRequest<GetTeamMembersRoute>,
   reply: FastifyReply
 ) {
   try {
@@ -27,12 +27,12 @@ export async function createTeamMemberHandler(
 ) {
   try {
     const user = request.user as { userId: number };
-    const teamMemberDto = {
+    const createTeamMemberDto = {
       ...request.body,
       teamFk: Number(request.params.teamId),
       userId: user.userId
     };
-    return reply.code(201).send(await createTeamMemberService(teamMemberDto));
+    return reply.code(201).send(await createTeamMemberService(createTeamMemberDto));
   } catch (error) {
     console.error("Error creating team member: ", error);
     await errorMessage(error, listOfErrorCodes, reply);

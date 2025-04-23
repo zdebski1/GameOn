@@ -2,7 +2,7 @@ import {
   getExistingTeamMember,
   getTeamMembersByTeamId,
 } from "./teamMember.repository";
-import { TeamMemberDto, TeamMemberWithIdDto } from "./teamMember.dto";
+import { CreateTeamMemberDto, TeamMemberWithIdDto } from "./teamMember.dto";
 import { createTeamMember } from "./teamMember.repository";
 import { HttpError } from "../utils/httpError";
 
@@ -24,11 +24,11 @@ export async function teamMembersByTeamId(
   }
 }
 
-export async function createTeamMemberService(teamMemberDto: TeamMemberDto) {
+export async function createTeamMemberService(createTeamMemberDto: CreateTeamMemberDto) {
   try {
-    const { teamFk, userFk, userId } = teamMemberDto;
+    const { teamFk, userFk, userId } = createTeamMemberDto;
 
-    const existingTeamMember = await getExistingTeamMember(teamMemberDto);
+    const existingTeamMember = await getExistingTeamMember(createTeamMemberDto);
 
     if (existingTeamMember) {
       throw new HttpError("Team Member already Exists", 409);

@@ -22,8 +22,15 @@ export async function loginService(loginRequestDto: LoginRequestDto) {
     throw new HttpError("Username or password is incorrect", 401);
   }
 
+  let role: string;
+  if (user.isAdmin) {
+     role = 'admin';
+  } else {
+     role = 'user';
+  }
+
   const token = jwt.sign(
-    { userId: user.userId, userName: user.email },
+    { userId: user.userId, userName: user.email, role },
     process.env.JWT_SECRET!,
     { expiresIn: "1h" }
   );

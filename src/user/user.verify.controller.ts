@@ -6,11 +6,10 @@ import {
 import { CreateUserVerifyDto } from "./user.verify.dto";
 import { errorMessage } from "../utils/helperFunctions";
 import { listOfErrorCodes } from "../utils/globalVariables";
+import { CreateUserVerifyRoute } from "./user.verify.type";
 
 export async function createUserEmailVerifyHandler(
-  request: FastifyRequest<{
-    Body: CreateUserVerifyDto;
-  }>,
+  request: FastifyRequest<CreateUserVerifyRoute>,
   reply: FastifyReply
 ) {
   try {
@@ -29,9 +28,7 @@ export async function createUserEmailVerifyHandler(
 }
 
 export async function createResendUserEmailVerificationHandler(
-  request: FastifyRequest<{
-    Body: CreateUserVerifyDto;
-  }>,
+  request: FastifyRequest<CreateUserVerifyRoute>,
   reply: FastifyReply
 ) {
   try {

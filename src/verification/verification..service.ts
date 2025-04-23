@@ -5,17 +5,17 @@ import {
 } from "../utils/helperFunctions";
 import { HttpError } from "../utils/httpError";
 import { sendEmail } from "../utils/sendEmail";
-import { findUserByEmail } from "./user.repository";
-import { CreateUserVerifyDto } from "./user.verify.dto";
+import { findUserByEmail } from "../user/user.repository";
+import { CreateVerifyEmailDto, UpdateVerifyDto } from "./verification..dto";
 import {
   updateEmailCodeAndTime,
   updateUserEmailVerifiedStatus,
-} from "./user.verify.repository";
+} from "./verification..repository";
 
-export async function createUserEmailVerifyService(
-  createUserVerifyDto: CreateUserVerifyDto
+export async function updateEmailVerification (
+  updateVerifyDto: UpdateVerifyDto
 ) {
-  const { email, emailVerificationCode } = createUserVerifyDto;
+  const { email, emailVerificationCode } = updateVerifyDto;
 
   const user = await findUserByEmail(email);
   const nowDateTime: Date = new Date();
@@ -48,9 +48,9 @@ export async function createUserEmailVerifyService(
   };
 }
 
-export async function sendVerificationCodeToEmail(email: string) {
+export async function createEmailVerification (createVerifyEmailDto: CreateVerifyEmailDto) {
   try {
-    const existingUser = await findUserByEmail(email);
+    const existingUser = await findUserByEmail(createVerifyEmailDto.email);
 
     if (!existingUser) {
       throw new HttpError("User does not exist", 404);

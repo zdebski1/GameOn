@@ -1,11 +1,11 @@
-import User from "./user.model";
+import { User } from "../models";
 import {
   UpdateEmailCodeAndTimeDto,
-  UpdateUserEmailVerifiedStatusDto,
-} from "./user.verify.dto";
+  UpdateEmailVerifiedStatusDto,
+} from "./verification..dto";
 
 export async function updateUserEmailVerifiedStatus(
-  updateUserEmailVerifiedStatusDto: UpdateUserEmailVerifiedStatusDto
+  updateUserEmailVerifiedStatusDto: UpdateEmailVerifiedStatusDto
 ) {
   await User.update(
     {

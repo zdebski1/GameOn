@@ -4,7 +4,7 @@ import { LoginRequestDto } from "./auth.dto";
 import { errorMessage } from "../utils/helperFunctions";
 import { listOfErrorCodes } from "../utils/globalVariables";
 
-export async function loginController(
+export async function LoginsController(
   request: FastifyRequest<{ Body: LoginRequestDto }>,
   reply: FastifyReply
 ) {

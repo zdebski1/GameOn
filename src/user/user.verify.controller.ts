@@ -1,43 +1,39 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import {
   createUserEmailVerifyService,
-  resendVerificationCodeToEmail,
+  sendVerificationCodeToEmail,
 } from "./user.verify.service";
-import { CreateUserVerifyDto } from "./user.verify.dto";
 import { errorMessage } from "../utils/helperFunctions";
 import { listOfErrorCodes } from "../utils/globalVariables";
-import { CreateUserVerifyRoute } from "./user.verify.type";
+import {
+  CreateSendEmailVerifyRoute,
+  CreateUserVerifyRoute,
+} from "./user.verify.type";
 
 export async function createUserEmailVerifyHandler(
   request: FastifyRequest<CreateUserVerifyRoute>,
   reply: FastifyReply
 ) {
   try {
-    const user = request.user as { userId: number };
-    const createUserVerifyDto = {
-      ...request.body,
-      userId: user.userId,
-    };
     return reply
       .code(201)
-      .send(await createUserEmailVerifyService(createUserVerifyDto));
+      .send(await createUserEmailVerifyService(request.body));
   } catch (error) {
     console.error("Error with user verification: ", error);
     await errorMessage(error, listOfErrorCodes, reply);
   }
 }
 
-export async function createResendUserEmailVerificationHandler(
-  request: FastifyRequest<CreateUserVerifyRoute>,
+export async function createSendUserEmailVerificationHandler(
+  request: FastifyRequest<CreateSendEmailVerifyRoute>,
   reply: FastifyReply
 ) {
   try {
-    const user = request.user as { userId: number };
     return reply
       .code(201)
-      .send(await resendVerificationCodeToEmail(user.userId));
+      .send(await sendVerificationCodeToEmail(request.body.email));
   } catch (error) {
-    console.error("Error resending user verification: ", error);
+    console.error("Error sending user verification: ", error);
     await errorMessage(error, listOfErrorCodes, reply);
   }
 }

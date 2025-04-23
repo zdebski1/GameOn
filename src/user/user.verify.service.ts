@@ -5,7 +5,7 @@ import {
 } from "../utils/helperFunctions";
 import { HttpError } from "../utils/httpError";
 import { sendEmail } from "../utils/sendEmail";
-import { findUserByUserId } from "./user.repository";
+import { findUserByEmail } from "./user.repository";
 import { CreateUserVerifyDto } from "./user.verify.dto";
 import {
   updateEmailCodeAndTime,
@@ -15,9 +15,9 @@ import {
 export async function createUserEmailVerifyService(
   createUserVerifyDto: CreateUserVerifyDto
 ) {
-  const { userId, emailVerificationCode } = createUserVerifyDto;
+  const { email, emailVerificationCode } = createUserVerifyDto;
 
-  const user = await findUserByUserId(userId);
+  const user = await findUserByEmail(email);
   const nowDateTime: Date = new Date();
 
   if (!user) {
@@ -40,7 +40,7 @@ export async function createUserEmailVerifyService(
     updatedBy: user.userId,
     updatedDateTime: new Date(),
   };
-  
+
   await updateUserEmailVerifiedStatus(updateUserEmailVerifiedStatusDto);
 
   return {
@@ -48,9 +48,9 @@ export async function createUserEmailVerifyService(
   };
 }
 
-export async function resendVerificationCodeToEmail(userId: number) {
+export async function sendVerificationCodeToEmail(email: string) {
   try {
-    const existingUser = await findUserByUserId(userId);
+    const existingUser = await findUserByEmail(email);
 
     if (!existingUser) {
       throw new HttpError("User does not exist", 404);
@@ -59,10 +59,10 @@ export async function resendVerificationCodeToEmail(userId: number) {
     const emailVerificationCode = (
       await generateRandomNumber(100000, 900000)
     ).toString();
-    const emailVerificationExpiresAt = addMinutesToDateTime(new Date(), 15);
+    const emailVerificationExpiresAt = addMinutesToDateTime(new Date(), 5);
 
-    const emailSubject = "GameOn Verification Code";
-    const emailBody = `Your verification code is: ${emailVerificationCode}`;
+    const emailSubject = `GameOn Verification Code: ${emailVerificationCode}`;
+    const emailBody = `GameOn verification code: ${emailVerificationCode}`;
 
     const sendEmailToUserDto = {
       to: existingUser.email,
@@ -72,10 +72,10 @@ export async function resendVerificationCodeToEmail(userId: number) {
     };
 
     const updateEmailCodeAndTimeDto = {
-      userId: userId,
+      userId: existingUser.userId,
       emailVerificationCode: emailVerificationCode,
       emailVerificationExpiresAt: emailVerificationExpiresAt,
-      updatedBy: userId,
+      updatedBy: existingUser.userId,
       updatedDateTime: new Date(),
     };
 

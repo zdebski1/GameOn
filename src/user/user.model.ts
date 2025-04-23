@@ -85,11 +85,11 @@ User.init(
     },
     emailVerificationCode: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     emailVerificationExpiresAt: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     createdDateTime: {
       type: DataTypes.DATE,

@@ -1,5 +1,5 @@
 export interface CreateUserVerifyDto {
-  userId: number;
+  email: string;
   emailVerificationCode: string;
 }
 
@@ -15,4 +15,8 @@ export interface UpdateUserEmailVerifiedStatusDto {
   userId: number;
   updatedBy: number;
   updatedDateTime: Date;
+}
+
+export interface CreateSendVerifyEmailDto {
+  email: string;
 }

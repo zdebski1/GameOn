@@ -1,5 +1,13 @@
-import { CreateUserVerifyDto } from "./user.verify.dto";
-
-export interface CreateUserVerifyRoute {
+import {
+    CreateUserVerifyDto,
+    CreateSendVerifyEmailDto,
+  } from "./user.verify.dto";
+  
+  export interface CreateUserVerifyRoute {
     Body: CreateUserVerifyDto;
-}
+  }
+  
+  export interface CreateSendEmailVerifyRoute {
+    Body: CreateSendVerifyEmailDto;
+  }
+  

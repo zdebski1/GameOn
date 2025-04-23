@@ -2,7 +2,7 @@ import { User } from "../models";
 import {
   UpdateEmailCodeAndTimeDto,
   UpdateEmailVerifiedStatusDto,
-} from "./verification..dto";
+} from "./verification.dto";
 
 export async function updateUserEmailVerifiedStatus(
   updateUserEmailVerifiedStatusDto: UpdateEmailVerifiedStatusDto

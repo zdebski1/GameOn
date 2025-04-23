@@ -6,11 +6,11 @@ import {
 import { HttpError } from "../utils/httpError";
 import { sendEmail } from "../utils/sendEmail";
 import { findUserByEmail } from "../user/user.repository";
-import { CreateVerifyEmailDto, UpdateVerifyDto } from "./verification..dto";
+import { CreateVerifyEmailDto, UpdateVerifyDto } from "./verification.dto";
 import {
   updateEmailCodeAndTime,
   updateUserEmailVerifiedStatus,
-} from "./verification..repository";
+} from "./verification.repository";
 
 export async function updateEmailVerification (
   updateVerifyDto: UpdateVerifyDto

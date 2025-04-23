@@ -6,7 +6,7 @@ import {
 import {
   createEmailVerificationSchema,
   updateEmailVerificationSchema,
-} from "./verification..schema";
+} from "./verification.schema";
 import {
   CreateEmailVerifyRoute,
   UpdateVerifyRoute,

@@ -6,9 +6,10 @@ import {
 import { TeamMemberDto } from "./teamMember.dto";
 import { listOfErrorCodes } from "../utils/globalVariables";
 import { errorMessage } from "../utils/helperFunctions";
+import { CreateTeamMemberRoute, GetAllTeamMembersRoute } from "./teamMember.type";
 
 export async function getAllTeamMembersHandler(
-  request: FastifyRequest<{ Params: { teamId: string } }>,
+  request: FastifyRequest<GetAllTeamMembersRoute>,
   reply: FastifyReply
 ) {
   try {
@@ -22,10 +23,7 @@ export async function getAllTeamMembersHandler(
 }
 
 export async function createTeamMemberHandler(
-  request: FastifyRequest<{
-    Params: { teamId: string };
-    Body: Omit<TeamMemberDto, "teamFk">;
-  }>,
+  request: FastifyRequest<CreateTeamMemberRoute>,
   reply: FastifyReply
 ) {
   try {

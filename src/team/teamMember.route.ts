@@ -4,17 +4,16 @@ import {
   getAllTeamMembersHandler,
 } from "./teamMember.controller";
 import { createTeamMemberSchema } from "./teamMember.schema";
+import { authorizeRole } from "../middleware/authorizeRole";
+import { CreateTeamMemberRoute, GetAllTeamMembersRoute } from "./teamMember.type";
 
 export default async function (fastify: FastifyInstance) {
-  fastify.register(async (teamScope) => {
-    teamScope.addHook("preHandler", async (request) => {
-      await request.jwtVerify();
-    });
+  fastify.get<GetAllTeamMembersRoute>("/teams/:teamId/members", 
+    { preHandler: authorizeRole(['user', 'admin']) }, 
+    getAllTeamMembersHandler);
 
-  teamScope.get("/teams/:teamId/members", getAllTeamMembersHandler);
-  teamScope.post(
+  fastify.post<CreateTeamMemberRoute>(
     "/teams/:teamId/members",
-    { schema: createTeamMemberSchema },
+    { preHandler: authorizeRole(['user', 'admin']) , schema: createTeamMemberSchema },
     createTeamMemberHandler
-  )});
-}
+  )};

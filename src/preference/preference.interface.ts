@@ -1,5 +1,5 @@
 export interface IPreferencesModel {
-  userPreferenceId?: number;
+  preferenceId?: number;
   userFk: number;
   allowSmsNotifications: boolean;
   allowEmailNotifications: boolean;

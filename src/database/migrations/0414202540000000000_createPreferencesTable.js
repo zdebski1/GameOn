@@ -1,6 +1,6 @@
 exports.up = function(knex) {
   return knex.schema.createTable('preferences', function(table) {
-    table.increments('userPreferenceId').primary();
+    table.increments('preferenceId').primary();
     table.integer('userFk').unsigned().notNullable();
     table.boolean('allowSmsNotifications');
     table.boolean('allowEmailNotifications');

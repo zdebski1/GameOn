@@ -1,14 +1,7 @@
 import { FastifyInstance } from 'fastify';
-import getAllAvailabilities from './availability.repository';
+import { GetAvailibitiesController } from './availability.controller';
+import { authorizeRole } from '../middleware/authorizeRole';
 
 export default async function (fastify: FastifyInstance) {
-    fastify.get('/availabilities', async (request, reply) => {
-        try {
-            const availabilities = await getAllAvailabilities();
-            reply.send(availabilities);
-        } catch (error) {
-            fastify.log.error(error);
-            reply.status(500).send({ error: 'Failed to fetch availabilities' });
-        }
-    });
-}
+    fastify.get('/availabilities/:teamId', {preHandler: authorizeRole(['user', 'admin']) }, GetAvailibitiesController)
+};

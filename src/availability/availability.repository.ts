@@ -1,6 +1,6 @@
 import Availability from "./availability.model";
 
-async function getAllAvailabilities() {
+export async function getAvailabilities() {
     try {
         const availabilities = await Availability.findAll();
 
@@ -11,5 +11,3 @@ async function getAllAvailabilities() {
         console.error('Error fetching availabilities:', error);
     }
 }
-
-export default getAllAvailabilities;

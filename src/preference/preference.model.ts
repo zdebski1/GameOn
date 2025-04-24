@@ -6,7 +6,7 @@ class UserPreferences
   extends Model<IPreferencesModel>
   implements IPreferencesModel
 {
-  public userPreferenceId!: number;
+  public preferenceId!: number;
   public userFk!: number;
   public allowSmsNotifications!: boolean;
   public allowEmailNotifications!: boolean;
@@ -18,7 +18,7 @@ class UserPreferences
 }
 UserPreferences.init(
   {
-    userPreferenceId: {
+    preferenceId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,

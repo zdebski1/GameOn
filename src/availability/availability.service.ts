@@ -1,8 +1,10 @@
+import { start } from "repl";
 import { CreateAvailabilityDto } from "./availability.dto";
 import {
   createAvailability,
   getAvailabilities,
 } from "./availability.repository";
+import { HttpError } from "../utils/httpError";
 
 export async function GetAvailibitiesService() {
   return await getAvailabilities();
@@ -14,6 +16,10 @@ export async function CreateAvailabilityService(
   try {
     const { teamFk, availableDate, startDateTime, endDateTime, userId } =
       availability;
+
+      if (endDateTime < startDateTime){
+        throw new HttpError ('End time cannot be prior to the start time', 400)
+      }
 
     const newAvailability = await createAvailability({
       teamFk,

@@ -1,4 +1,6 @@
 import Availability from "./availability.model";
+import { CreateAvailabilityDto } from "./availability.dto";
+import { IAvailabilityModel } from "./availability.interface";
 
 export async function getAvailabilities() {
     try {
@@ -11,3 +13,7 @@ export async function getAvailabilities() {
         console.error('Error fetching availabilities:', error);
     }
 }
+
+export async function createAvailability(availability: Omit<IAvailabilityModel,'availabilityId'>) {
+    return await Availability.create(availability);
+  }

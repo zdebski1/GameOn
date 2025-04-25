@@ -1,16 +1,21 @@
-import IAvailabilityModel from './availability.interface'; 
-import sequelizeDb from '../config/sequelizeDb';  
-import { DataTypes, Model } from 'sequelize';
+import { IAvailabilityModel } from "./availability.interface";
+import sequelizeDb from "../config/sequelizeDb";
+import { DataTypes, Model } from "sequelize";
 
-class Availability extends Model<IAvailabilityModel> implements IAvailabilityModel {
+class Availability
+  extends Model<IAvailabilityModel>
+  implements IAvailabilityModel
+{
   public availabilityId!: number;
-  public gameNameFk!: number;
   public teamFk!: number;
-  public availableDateTime!: Date;
+  public teamMemberFk!: number;
+  public availableDate!: Date;
+  public startDateTime!: Date;
+  public endDateTime!: Date;
   public createdDateTime!: Date;
   public createdBy!: number;
   public updatedDateTime!: Date;
-  public updatedBy!: number
+  public updatedBy!: number;
 }
 
 Availability.init(
@@ -20,21 +25,32 @@ Availability.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    gameNameFk: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     teamFk: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },    
-    availableDateTime: {
+    },
+    teamMemberFk: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    availableDate: {
       type: DataTypes.DATE,
+      allowNull: false,
+    },
+    startDateTime: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      allowNull: false,
+    },
+    endDateTime: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
       allowNull: false,
     },
     createdDateTime: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
+      allowNull: false,
     },
     createdBy: {
       type: DataTypes.STRING,
@@ -42,16 +58,16 @@ Availability.init(
     },
     updatedDateTime: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
+      allowNull: true,
     },
     updatedBy: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {
     sequelize: sequelizeDb,
-    tableName: 'availability',
+    tableName: "availability",
     timestamps: false,
   }
 );

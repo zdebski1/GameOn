@@ -1,12 +1,12 @@
-interface IAvailabilityModel {
-    availabilityId: number,
-    gameNameFk: number,
-    teamFk: number,
-    availableDateTime: Date,
-    createdDateTime: Date,
-    createdBy: number,
-    updatedDateTime: Date,
-    updatedBy: number
-}
-
-export default IAvailabilityModel;
+export interface IAvailabilityModel {
+    availabilityId?: number;
+    teamFk: number;
+    teamMemberFk: number;
+    availableDate: Date;
+    startDateTime: Date;
+    endDateTime: Date;
+    createdDateTime: Date;
+    createdBy: number;
+    updatedDateTime?: Date | null;
+    updatedBy?: number | null;
+  }

@@ -32,7 +32,7 @@ export async function AuthenticateService(authenticateRequestDto: AuthenticateRe
   const token = jwt.sign(
     { userId: user.userId, userName: user.email, role },
     process.env.JWT_SECRET!,
-    { expiresIn: "1h" }
+    { expiresIn: "24h" }
   );
 
   return {

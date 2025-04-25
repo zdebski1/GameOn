@@ -4,11 +4,11 @@ import {
   GetAvailibitiesController,
 } from "./availability.controller";
 import { authorizeRole } from "../middleware/authorizeRole";
-import { CreateAvailabilityRoute } from "./availability.type";
+import { CreateAvailabilityRoute, GetAvailabilityRoute } from "./availability.type";
 
 export default async function (fastify: FastifyInstance) {
-  fastify.get(
-    "/availabilities/:teamId",
+  fastify.get<GetAvailabilityRoute>(
+    "/availabilities/:teamId/member/:teamMemberId",
     { preHandler: authorizeRole(["user", "admin"]) },
     GetAvailibitiesController
   );

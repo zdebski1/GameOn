@@ -1,4 +1,4 @@
-import { CreateAvailabilityDto } from "./availability.dto";
+import { CreateAvailabilityDto, GetAvailabilityDto } from "./availability.dto";
 
 export interface CreateAvailabilityRoute {
   Params: {
@@ -6,3 +6,11 @@ export interface CreateAvailabilityRoute {
   };
   Body: Omit<CreateAvailabilityDto, "teamFk">;
 }
+
+export interface GetAvailabilityRoute {
+    Params: {
+      teamId: string;
+      teamMemberId: string;
+    };
+}
+  

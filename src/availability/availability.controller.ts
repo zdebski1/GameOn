@@ -5,14 +5,18 @@ import {
 } from "./availability.service";
 import { errorMessage } from "../utils/helperFunctions";
 import { listOfErrorCodes } from "../utils/globalVariables";
-import { CreateAvailabilityRoute } from "./availability.type";
+import { CreateAvailabilityRoute, GetAvailabilityRoute } from "./availability.type";
 
 export async function GetAvailibitiesController(
-  request: FastifyRequest,
+  request: FastifyRequest<GetAvailabilityRoute>,
   reply: FastifyReply
 ) {
   try {
-    reply.send(await GetAvailibitiesService());
+    const getAvailabilityRoute = {
+      teamFk: Number(request.params.teamId),
+      teamMemberFk: Number(request.params.teamMemberId)
+    } ;
+    reply.send(await GetAvailibitiesService(getAvailabilityRoute));
   } catch (error) {
     console.log("error: Failed to fetch availabilities");
     reply.status(500).send({ error: "Failed to fetch availabilities" });

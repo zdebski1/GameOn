@@ -5,3 +5,9 @@ export interface CreateAvailabilityDto {
   endDateTime: Date;
   userId: number;
 }
+
+
+export interface GetAvailabilityDto {
+  teamFk: number;
+  teamMemberFk: number;
+}

@@ -1,14 +1,15 @@
 import Availability from "./availability.model";
-import { CreateAvailabilityDto } from "./availability.dto";
+import { GetAvailabilityDto } from "./availability.dto";
 import { IAvailabilityModel } from "./availability.interface";
 
-export async function getAvailabilities() {
+export async function getAvailabilities(getAvailabilityDto: GetAvailabilityDto) {
     try {
-        const availabilities = await Availability.findAll();
+        const availabilities = await Availability.findAll({
+            where: 
+                [{ teamFk: getAvailabilityDto.teamFk }, { teamMemberFk: getAvailabilityDto.teamMemberFk }]
+    });
 
-        const plainAvailabilities = availabilities.map(availability => availability.get({ plain: true }));
-
-        return plainAvailabilities;
+        return availabilities;
     }catch(error) {
         console.error('Error fetching availabilities:', error);
     }

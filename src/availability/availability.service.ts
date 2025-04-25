@@ -1,13 +1,12 @@
-import { start } from "repl";
-import { CreateAvailabilityDto } from "./availability.dto";
+import { CreateAvailabilityDto, GetAvailabilityDto, } from "./availability.dto";
 import {
   createAvailability,
   getAvailabilities,
 } from "./availability.repository";
 import { HttpError } from "../utils/httpError";
 
-export async function GetAvailibitiesService() {
-  return await getAvailabilities();
+export async function GetAvailibitiesService(getAvailabilityDto: GetAvailabilityDto) {
+  return await getAvailabilities(getAvailabilityDto);
 }
 
 export async function CreateAvailabilityService(

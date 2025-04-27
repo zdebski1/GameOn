@@ -1,13 +1,13 @@
-import { TeamDto, CreateTeamDto } from "./team.dto";
+import { TeamDto } from "./team.dto";
 import { createTeam, getAllTeamsForUser } from "./team.repository";
 import { HttpError } from "../utils/httpError";
 import { getTeamsOwnedByUser } from "./team.repository";
 
-export async function createTeamService(createTeamDto: CreateTeamDto) {
+export async function createTeamService(teamDto: TeamDto) {
   try {
-    const { teamName, userId } = createTeamDto;
+    const { teamName, userId } = teamDto;
 
-    if (await getTeamsOwnedByUser(createTeamDto.userId, createTeamDto.teamName)) {
+    if (await getTeamsOwnedByUser(teamDto.userId, teamDto.teamName)) {
       throw new HttpError("Team already exists", 409);
     }
 

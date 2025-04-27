@@ -1,5 +1,5 @@
-import { CreateTeamDto } from "./team.dto";
+import { TeamDto } from "./team.dto";
 
 export interface CreateTeamRoute {
-  Body: CreateTeamDto;
+  Body: TeamDto;
 }

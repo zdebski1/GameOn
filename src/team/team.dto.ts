@@ -4,9 +4,3 @@ export interface TeamDto {
     isOwner: boolean;
     userId: number;
   }
-  
-  export interface CreateTeamDto {
-    teamName: string;
-    userId: number;
-  }
-  

@@ -60,7 +60,7 @@ export async function createEmailVerification (verifyDto: VerifyDto) {
     const emailVerificationCode = (
       await generateRandomNumber(100000, 900000)
     ).toString();
-    const emailVerificationExpiresAt = addMinutesToDateTime(new Date(), 5);
+    const emailVerificationExpiresAt = addMinutesToDateTime(new Date(), 15);
 
     const emailSubject = `GameOn Verification Code: ${emailVerificationCode}`;
     const emailBody = `GameOn verification code: ${emailVerificationCode}`;

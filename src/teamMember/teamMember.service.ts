@@ -2,33 +2,29 @@ import {
   getExistingTeamMember,
   getTeamMembersByTeamId,
 } from "./teamMember.repository";
-import { CreateTeamMemberDto, TeamMemberWithIdDto } from "./teamMember.dto";
+import { TeamMemberDto } from "./teamMember.dto";
 import { createTeamMember } from "./teamMember.repository";
 import { HttpError } from "../utils/httpError";
 
 export async function teamMembersByTeamId(
   teamId: string
-): Promise<TeamMemberWithIdDto[]> {
+): Promise<TeamMemberDto[]> {
   try {
     const teamMembers = await getTeamMembersByTeamId(teamId);
 
-    return teamMembers.map((member) => ({
-      teamMemberId: member.teamMemberId,
-      teamFk: member.teamFk,
-      firstName: member.user.firstName,
-      lastName: member.user.lastName,
-    }));
+    return teamMembers;
+    
   } catch (error) {
     console.error("Error fetching team members: ", error);
     throw error;
   }
 }
 
-export async function createTeamMemberService(createTeamMemberDto: CreateTeamMemberDto) {
+export async function createTeamMemberService(teamMemberDto: TeamMemberDto) {
   try {
-    const { teamFk, userFk, userId } = createTeamMemberDto;
+    const { teamFk, userFk } = teamMemberDto;
 
-    const existingTeamMember = await getExistingTeamMember(createTeamMemberDto);
+    const existingTeamMember = await getExistingTeamMember(teamMemberDto);
 
     if (existingTeamMember) {
       throw new HttpError("Team Member already Exists", 409);
@@ -38,7 +34,7 @@ export async function createTeamMemberService(createTeamMemberDto: CreateTeamMem
       teamFk,
       userFk,
       isActive: true,
-      createdBy: userId,
+      createdBy: userFk,
       createdDateTime: new Date(),
       updatedDateTime: null,
       updatedBy: null,

@@ -1,10 +1,10 @@
 import { User, TeamMember } from "../models";
-import { GetTeamMemberDto, TeamMemberWithUserDto } from "./teamMember.dto";
+import { TeamMemberDto } from "./teamMember.dto";
 import ITeamMemberModel from "./teamMember.interface";
 
 export async function getTeamMembersByTeamId(
   teamId: string
-): Promise<TeamMemberWithUserDto[]> {
+): Promise<TeamMemberDto[]> {
   try {
     const teamMembers = await TeamMember.findAll({
       where: [{ teamFk: teamId }, { isActive: true }],
@@ -20,7 +20,7 @@ export async function getTeamMembersByTeamId(
 
     return teamMembers.map((tm) => {
       const plain = tm.get({ plain: true }) as any;
-      return plain as TeamMemberWithUserDto;
+      return plain as TeamMemberDto;
     });
   } catch (error) {
     console.error("Error fetching Team Members:", error);
@@ -34,12 +34,12 @@ export async function createTeamMember(
   return TeamMember.create(teamMemberModel);
 }
 
-export async function getExistingTeamMember(getTeamMemberDto: GetTeamMemberDto) {
+export async function getExistingTeamMember(teamMemberDto: TeamMemberDto) {
   try {
     return TeamMember.findOne({
       where: [
-        { userFk: getTeamMemberDto.userFk },
-        { teamFk: getTeamMemberDto.teamFk },
+        { userFk: teamMemberDto.userFk },
+        { teamFk: teamMemberDto.teamFk },
         { isActive: true },
       ],
     });

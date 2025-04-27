@@ -1,4 +1,4 @@
-import { CreateTeamMemberDto } from "./teamMember.dto";
+import { TeamMemberDto } from "./teamMember.dto";
 
 export interface GetTeamMembersRoute {
   Params: {
@@ -10,5 +10,5 @@ export interface CreateTeamMemberRoute {
   Params: {
     teamId: string;
   };
-  Body: Omit<CreateTeamMemberDto, "teamFk">;
+  Body: Omit<TeamMemberDto, "teamFk">;
 }

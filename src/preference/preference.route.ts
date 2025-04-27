@@ -9,12 +9,12 @@ import { CreatePreferenceRoute } from "./preference.type";
 
 export async function preferencesRoutes(fastify: FastifyInstance) {
   fastify.post<CreatePreferenceRoute>(
-      "user/preferences",
+      "/user/preferences",
       { preHandler: authorizeRole(['user','admin']), schema: createPreferencesSchema },
       CreatePreferencesController
     );
     fastify.get(
-      "user/preferences",
+      "/user/preferences",
       {preHandler: authorizeRole(['user','admin'])},
       GetPreferencesByUserController
     );

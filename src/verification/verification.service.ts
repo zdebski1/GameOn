@@ -5,7 +5,7 @@ import {
 } from "../utils/helperFunctions";
 import { HttpError } from "../utils/httpError";
 import { sendEmail } from "../utils/sendEmail";
-import { getUserByEmail } from "../user/user.repository";
+import { getUserByEmail, getUserByUserName } from "../user/user.repository";
 import { VerifyDto } from "./verification.dto";
 import {
   updateEmailCodeAndTime,
@@ -15,30 +15,34 @@ import {
 export async function updateEmailVerification (
   verifyDto: VerifyDto
 ) {
-  const { email, emailVerificationCode } = verifyDto;
 
-  const user = await getUserByEmail(email);
-  const nowDateTime: Date = new Date();
+  const existingUser = await getUserByUserName(verifyDto.userName);
 
-  if (!user) {
+  const localDate = new Date();
+  const utcDate = new Date(localDate.toISOString());
+
+  if (!existingUser) {
     throw new HttpError("User Does not exist", 404);
   }
 
-  if (user.emailVerificationExpiresAt < nowDateTime) {
+  console.log(existingUser.emailVerificationExpiresAt, utcDate)
+
+  if (existingUser.emailVerificationExpiresAt < utcDate) {
     throw new HttpError("Verification code has expired", 400);
   }
 
-  if (user.emailVerificationCode !== emailVerificationCode) {
+  if (existingUser.emailVerificationCode !== verifyDto.emailVerificationCode) {
     throw new HttpError("Invalid verification code", 401);
   }
 
-  if (user.isEmailVerified == true) {
+  if (existingUser.isEmailVerified == true) {
     throw new HttpError("Email already verified", 400);
   }
   const updateUserEmailVerifiedStatusDto = {
-    userId: user.userId,
-    email: user.email,
-    updatedBy: user.userId,
+    userId: existingUser.userId,
+    userName: existingUser.userName,
+    email: existingUser.email,
+    updatedBy: existingUser.userId,
     updatedDateTime: new Date(),
   };
 
@@ -51,7 +55,7 @@ export async function updateEmailVerification (
 
 export async function createEmailVerification (verifyDto: VerifyDto) {
   try {
-    const existingUser = await getUserByEmail(verifyDto.email);
+    const existingUser = await getUserByUserName(verifyDto.userName);
 
     if (!existingUser) {
       throw new HttpError("User does not exist", 404);
@@ -60,7 +64,11 @@ export async function createEmailVerification (verifyDto: VerifyDto) {
     const emailVerificationCode = (
       await generateRandomNumber(100000, 900000)
     ).toString();
-    const emailVerificationExpiresAt = addMinutesToDateTime(new Date(), 15);
+
+    const localDate = new Date();
+    const utcDate = new Date(localDate.toISOString());
+
+    const emailVerificationExpiresAt = addMinutesToDateTime(utcDate, 15);
 
     const emailSubject = `GameOn Verification Code: ${emailVerificationCode}`;
     const emailBody = `GameOn verification code: ${emailVerificationCode}`;
@@ -74,6 +82,7 @@ export async function createEmailVerification (verifyDto: VerifyDto) {
 
     const updateEmailCodeAndTimeDto = {
       userId: existingUser.userId,
+      userName: existingUser.userName,
       email: existingUser.email,
       emailVerificationCode: emailVerificationCode,
       emailVerificationExpiresAt: emailVerificationExpiresAt,

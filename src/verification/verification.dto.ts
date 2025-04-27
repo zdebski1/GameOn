@@ -1,5 +1,6 @@
 export interface VerifyDto {
   userId?: number;
+  userName: string;
   email: string,
   emailVerificationCode?: string;
   emailVerificationExpiresAt?: Date;

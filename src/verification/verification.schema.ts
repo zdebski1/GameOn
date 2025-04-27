@@ -1,12 +1,14 @@
 export const updateEmailVerificationSchema = {
   body: {
     type: "object",
-    required: ["email"],
+    required: ["userName","email"],
     properties: {
+      userName: { type: "string"},      
       email: { type: "string", format: "email" },
     },
     errorMessage: {
       required: {
+        userName: "UserName is required",
         email: "Email is required"
       },
     },
@@ -29,13 +31,15 @@ export const updateEmailVerificationSchema = {
 export const createEmailVerificationSchema = {
   body: {
     type: "object",
-    required: ["email"],
+    required: ["userName","email"],
     properties: {
+      userName: { type: "string"},      
       email: { type: "string", format: "email" },
     },
     errorMessage: {
       required: {
-        email: "Email is required",
+        userName: "UserName is required",
+        email: "Email is required"
       },
     },
   },

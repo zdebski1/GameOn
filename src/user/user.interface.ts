@@ -1,8 +1,9 @@
 export interface IUserModel {
   userId?: number;
+  userName: string;
   password: string;
   email: string;
-  phoneNumber: string;
+  phoneNumber?: string;
   firstName: string;
   lastName: string;
   isActive: boolean;

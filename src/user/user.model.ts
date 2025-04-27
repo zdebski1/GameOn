@@ -5,6 +5,7 @@ import { TeamMember } from "../models";
 
 class User extends Model<IUserModel> implements IUserModel {
   public userId!: number;
+  public userName!: string;
   public password!: string;
   public email!: string;
   public phoneNumber!: string;
@@ -37,6 +38,10 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    userName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },    
     password: {
       type: DataTypes.STRING,
       allowNull: false,

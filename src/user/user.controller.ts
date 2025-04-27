@@ -1,11 +1,11 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { CreateUserDTO } from "./user.dto";
+import { UserDTO } from "./user.dto";
 import { createUserService } from "./user.service";
 import { errorMessage } from "../utils/helperFunctions";
 import { listOfErrorCodes } from "../utils/globalVariables";
 
 export async function CreateUsersController(
-  request: FastifyRequest<{ Body: CreateUserDTO }>,
+  request: FastifyRequest<{ Body: UserDTO }>,
   reply: FastifyReply
 ) {
   try {

@@ -2,10 +2,10 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { HttpError } from "../utils/httpError";
 import { AuthenticateRequestDto } from "./authenticate.dto";
-import { findUserByEmail } from "../user/user.repository";
+import { getUserByUserName } from "../user/user.repository";
 
 export async function AuthenticateService(authenticateRequestDto: AuthenticateRequestDto) {
-  const user = await findUserByEmail(authenticateRequestDto.email);
+  const user = await getUserByUserName(authenticateRequestDto.userName);
 
   if (!user) {
     throw new HttpError("Username or password is incorrect", 401);
@@ -30,7 +30,7 @@ export async function AuthenticateService(authenticateRequestDto: AuthenticateRe
   }
 
   const token = jwt.sign(
-    { userId: user.userId, userName: user.email, role },
+    { userId: user.userId, userName: user.userName, role },
     process.env.JWT_SECRET!,
     { expiresIn: "24h" }
   );

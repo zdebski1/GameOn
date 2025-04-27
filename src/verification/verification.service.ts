@@ -5,19 +5,19 @@ import {
 } from "../utils/helperFunctions";
 import { HttpError } from "../utils/httpError";
 import { sendEmail } from "../utils/sendEmail";
-import { findUserByEmail } from "../user/user.repository";
-import { CreateVerifyEmailDto, UpdateVerifyDto } from "./verification.dto";
+import { getUserByEmail } from "../user/user.repository";
+import { VerifyDto } from "./verification.dto";
 import {
   updateEmailCodeAndTime,
   updateUserEmailVerifiedStatus,
 } from "./verification.repository";
 
 export async function updateEmailVerification (
-  updateVerifyDto: UpdateVerifyDto
+  verifyDto: VerifyDto
 ) {
-  const { email, emailVerificationCode } = updateVerifyDto;
+  const { email, emailVerificationCode } = verifyDto;
 
-  const user = await findUserByEmail(email);
+  const user = await getUserByEmail(email);
   const nowDateTime: Date = new Date();
 
   if (!user) {
@@ -37,6 +37,7 @@ export async function updateEmailVerification (
   }
   const updateUserEmailVerifiedStatusDto = {
     userId: user.userId,
+    email: user.email,
     updatedBy: user.userId,
     updatedDateTime: new Date(),
   };
@@ -48,9 +49,9 @@ export async function updateEmailVerification (
   };
 }
 
-export async function createEmailVerification (createVerifyEmailDto: CreateVerifyEmailDto) {
+export async function createEmailVerification (verifyDto: VerifyDto) {
   try {
-    const existingUser = await findUserByEmail(createVerifyEmailDto.email);
+    const existingUser = await getUserByEmail(verifyDto.email);
 
     if (!existingUser) {
       throw new HttpError("User does not exist", 404);
@@ -73,6 +74,7 @@ export async function createEmailVerification (createVerifyEmailDto: CreateVerif
 
     const updateEmailCodeAndTimeDto = {
       userId: existingUser.userId,
+      email: existingUser.email,
       emailVerificationCode: emailVerificationCode,
       emailVerificationExpiresAt: emailVerificationExpiresAt,
       updatedBy: existingUser.userId,

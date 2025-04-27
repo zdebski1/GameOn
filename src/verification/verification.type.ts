@@ -1,14 +1,13 @@
 import {
-    UpdateVerifyDto,
-    CreateVerifyEmailDto,
+    VerifyDto
   } from "./verification.dto";
   
   export interface UpdateVerifyRoute {
-    Body: UpdateVerifyDto;
+    Body: VerifyDto;
     Params: {emailVerificationCode: string}
   }
   
   export interface CreateEmailVerifyRoute {
-    Body: CreateVerifyEmailDto;
+    Body: VerifyDto;
   }
   

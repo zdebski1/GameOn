@@ -2,7 +2,7 @@ import User from "./user.model";
 import { IUserModel } from "./user.interface";
 import { Op, Sequelize } from "sequelize";
 
-export async function findUserByEmail(email: string) {
+export async function getUserByEmail(email: string) {
   return User.findOne({
     where: {
       [Op.and]: [
@@ -15,9 +15,22 @@ export async function findUserByEmail(email: string) {
   });
 }
 
-export async function findUserByUserId(userId: number) {
+export async function getUserByUserId(userId: number) {
   return User.findOne({
     where: { userId: userId },
+  });
+}
+
+export async function getUserByUserName(userName: string) {
+  return User.findOne({
+    where: {
+      [Op.and]: [
+        Sequelize.where(
+          Sequelize.fn("LOWER", Sequelize.col("userName")),
+          userName.toLowerCase()
+        ),
+      ],
+    },
   });
 }
 

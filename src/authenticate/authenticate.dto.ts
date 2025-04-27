@@ -1,5 +1,5 @@
 export interface AuthenticateRequestDto {
-    email: string;
+    userName: string;
     password: string;
   }
   

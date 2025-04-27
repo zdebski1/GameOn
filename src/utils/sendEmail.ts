@@ -1,6 +1,6 @@
-import { SendEmailToUserDto } from "../user/user.dto";
+import { EmailDto } from "../user/user.dto";
 
-export async function sendEmail(sendEmailToUserDto: SendEmailToUserDto) {
+export async function sendEmail(sendEmailToUserDto: EmailDto) {
   const sgMail = require("@sendgrid/mail");
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const msg = {

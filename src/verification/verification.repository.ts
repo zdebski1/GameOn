@@ -1,37 +1,35 @@
 import { User } from "../models";
 import {
-  UpdateEmailCodeAndTimeDto,
-  UpdateEmailVerifiedStatusDto,
+  VerifyDto
 } from "./verification.dto";
 
 export async function updateUserEmailVerifiedStatus(
-  updateUserEmailVerifiedStatusDto: UpdateEmailVerifiedStatusDto
+  verifyDto: VerifyDto
 ) {
   await User.update(
     {
       isEmailVerified: true,
-      updatedBy: updateUserEmailVerifiedStatusDto.updatedBy,
-      updatedDateTime: updateUserEmailVerifiedStatusDto.updatedDateTime,
+      updatedBy: verifyDto.updatedBy,
+      updatedDateTime: verifyDto.updatedDateTime,
     },
     {
-      where: { userId: updateUserEmailVerifiedStatusDto.userId },
+      where: { userId: verifyDto.userId },
     }
   );
 }
 
 export async function updateEmailCodeAndTime(
-  updateEmailCodeAndTimeDto: UpdateEmailCodeAndTimeDto
+  verifyDto: VerifyDto
 ) {
   await User.update(
     {
-      emailVerificationCode: updateEmailCodeAndTimeDto.emailVerificationCode,
-      emailVerificationExpiresAt:
-        updateEmailCodeAndTimeDto.emailVerificationExpiresAt,
-      updatedBy: updateEmailCodeAndTimeDto.updatedBy,
-      updatedDateTime: updateEmailCodeAndTimeDto.updatedDateTime,
+      emailVerificationCode: verifyDto.emailVerificationCode,
+      emailVerificationExpiresAt: verifyDto.emailVerificationExpiresAt,
+      updatedBy: verifyDto.updatedBy,
+      updatedDateTime: verifyDto.updatedDateTime,
     },
     {
-      where: { userId: updateEmailCodeAndTimeDto.userId },
+      where: { userId: verifyDto.userId },
     }
   );
 }

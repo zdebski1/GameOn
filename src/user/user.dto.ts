@@ -1,12 +1,13 @@
-export interface CreateUserDTO {
+export interface UserDTO {
+  userName: string;
   password: string;
   email: string;
-  phoneNumber: string;
+  phoneNumber?: string;
   firstName: string;
   lastName: string;
 }
 
-export interface SendEmailToUserDto {
+export interface EmailDto {
   to: string;
   from: string;
   subject: string;

@@ -1,17 +1,17 @@
-import { CreateUserDTO } from "./user.dto";
+import { UserDTO } from "./user.dto";
 import bcrypt from "bcrypt";
 import { HttpError } from "../utils/httpError";
-import { findUserByEmail, createUser } from "./user.repository";
+import { createUser, getUserByUserName } from "./user.repository";
 import { v4 as uuidv4 } from "uuid";
 
-export async function createUserService(createUserDto: CreateUserDTO) {
+export async function createUserService(createUserDto: UserDTO) {
   try {
-    const { password, email, phoneNumber, firstName, lastName } = createUserDto;
+    const { userName, password, email, phoneNumber, firstName, lastName } = createUserDto;
 
-    const existingUser = await findUserByEmail(email);
+    const existingUser = await getUserByUserName(userName);
 
     if (existingUser) {
-      throw new HttpError("Email already exists", 409);
+      throw new HttpError("Username already exists", 409);
     }
 
     const createdUuid: string = uuidv4();
@@ -19,6 +19,7 @@ export async function createUserService(createUserDto: CreateUserDTO) {
     const hashedPassword = await bcrypt.hash(combinedPassword, 10);
 
     const newUser = await createUser({
+      userName,
       password: hashedPassword,
       email,
       phoneNumber,
@@ -41,6 +42,7 @@ export async function createUserService(createUserDto: CreateUserDTO) {
       message: "User created successfully",
       user: {
         userId: newUser.userId,
+        userName: newUser.userName,
         email: newUser.email,
         phoneNumber: newUser.phoneNumber,
         firstName: newUser.firstName,

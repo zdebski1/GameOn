@@ -1,10 +1,10 @@
 export const AuthenticateSchema = {
   body: {
     type: "object",
-    required: ["email", "password"],
+    required: ["userName", "password"],
     properties: {
+      userName: { type: "string" },
       password: { type: "string" },
-      email: { type: "string" },
     },
   },
 };

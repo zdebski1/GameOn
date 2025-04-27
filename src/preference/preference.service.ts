@@ -2,11 +2,11 @@ import {
     createPreference,
     getPreferencesByUser,
   } from "./preference.repository";
-  import { CreatePreferenceDto } from "./preference.dto";
+  import { PreferenceDto } from "./preference.dto";
   import { HttpError } from "../utils/httpError";
   
   export async function createUserPreferenceService(
-    createUserPreferenceDto: CreatePreferenceDto
+    preferenceDto: PreferenceDto
   ) {
     try {
       const {
@@ -14,7 +14,7 @@ import {
         allowSmsNotifications,
         allowEmailNotifications,
         marketingOptIn,
-      } = createUserPreferenceDto;
+      } = preferenceDto;
   
       const userPreferencesExist = await getPreferencesByUser(userFk);
   

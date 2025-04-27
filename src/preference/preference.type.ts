@@ -1,5 +1,5 @@
-import { CreatePreferenceDto } from "./preference.dto";
+import { PreferenceDto } from "./preference.dto";
 
 export interface CreatePreferenceRoute {
-    Body: Omit<CreatePreferenceDto, "userFk">;
+    Body: Omit<PreferenceDto, "userFk">;
 }

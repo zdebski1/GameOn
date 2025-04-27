@@ -1,4 +1,4 @@
-export interface CreatePreferenceDto {
+export interface PreferenceDto {
     userFk: number;
     allowSmsNotifications: boolean;
     allowEmailNotifications: boolean;

@@ -12,7 +12,7 @@ export async function getTeamMembersByTeamId(
         {
           model: User,
           as: "user",
-          attributes: ["firstName", "lastName"],
+          attributes: ["userId", "firstName", "lastName", "userName" ,"email", "phoneNumber"],
         },
       ],
       attributes: ["teamMemberId", "teamFk"],

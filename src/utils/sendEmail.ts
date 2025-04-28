@@ -1,4 +1,4 @@
-import { EmailDto } from "../user/user.dto";
+import { EmailDto } from "../user/dto";
 
 export async function sendEmail(sendEmailToUserDto: EmailDto) {
   const sgMail = require("@sendgrid/mail");

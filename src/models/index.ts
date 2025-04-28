@@ -1,5 +1,5 @@
-import User from "../user/user.model";
-import TeamMember from "../teamMember/teamMember.model";
+import User from "../user/model";
+import TeamMember from "../teamMember/model";
 
 User.associate({ TeamMember });
 TeamMember.associate({ User });

@@ -2,15 +2,15 @@ import Fastify from "fastify";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 import ajvErrors from "ajv-errors";
-import availabilityRoutes from "../availability/availability.route";
-import teamRoutes from "../team/team.route";
-import teamMemberRoutes from "../teamMember/teamMember.route";
-import { userRoutes } from "../user/user.route";
-import { authRoutes } from "../authenticate/authenticate.route";
+import availabilityRoutes from "../availability/route";
+import teamRoutes from "../team/route";
+import teamMemberRoutes from "../teamMember/route";
+import { userRoutes } from "../user/route";
+import { authRoutes } from "../authenticate/route";
 
 import cors from "@fastify/cors";
-import { preferencesRoutes } from "../preference/preference.route";
-import { verificationRoutes } from "../verification/verification.route";
+import { preferencesRoutes } from "../preference/route";
+import { verificationRoutes } from "../verification/route";
 import fastifyJwt from '@fastify/jwt';
 
 
